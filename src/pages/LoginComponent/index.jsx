@@ -1,5 +1,7 @@
 import {useState} from 'react';
-import {Breadcrumb, Button, Card, Col, Container, Form, Row} from 'react-bootstrap';
+import {Breadcrumb, Card, Col, Container, Form, Row} from 'react-bootstrap';
+import Button from 'react-bootstrap/Button';
+
 import {FaFacebook, FaGithub, FaGoogle, FaLinkedin} from 'react-icons/fa';
 import './Login.scss';
 
@@ -13,7 +15,7 @@ const LoginComponent = () => {
                 <Container fluid id="container" >
                     <Row className="justify-content-center">
                         <Col>
-                            <Card className={`auth-container ${active ? 'active' : ''}`}>
+                            <Card className={`auth-container ${active ? 'active' : ''}`} style={{ width: '50vn', height: '60vh' }}>
                                 <div
                                     className="form-container sign-up mt-4">
                                     <Card.Body className="text-center ">
