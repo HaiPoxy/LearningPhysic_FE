@@ -45,7 +45,22 @@ const LoginComponent = () => {
                                             <Form.Group controlId="password">
                                                 <Form.Control type="password" placeholder="Password"/>
                                             </Form.Group>
-                                            <Button variant="primary" type="submit">Sign Up</Button>
+                                            <Button
+                                                style={{
+                                                    backgroundColor: '#512da8',
+                                                    color: '#fff',
+                                                    fontSize: '12px',
+                                                    padding: '10px 45px',
+                                                    border: '1px solid transparent',
+                                                    borderRadius: '8px',
+                                                    fontWeight: 600,
+                                                    letterSpacing: '0.5px',
+                                                    textTransform: 'uppercase',
+                                                    marginTop: '10px',
+                                                    cursor: 'pointer',
+                                                }}
+                                                type="submit"
+                                            >Sign Up</Button>
                                         </Form>
                                     </Card.Body>
                                 </div>
@@ -75,7 +90,22 @@ const LoginComponent = () => {
                                                 <Form.Control type="password" placeholder="Password"/>
                                             </Form.Group>
                                             <a href="#">Forget Your Password?</a>
-                                            <Button variant="primary" type="submit">Sign In</Button>
+                                            <Button
+                                                style={{
+                                                    backgroundColor: '#512da8',
+                                                    color: '#fff',
+                                                    fontSize: '12px',
+                                                    padding: '10px 45px',
+                                                    border: '1px solid transparent',
+                                                    borderRadius: '8px',
+                                                    fontWeight: 600,
+                                                    letterSpacing: '0.5px',
+                                                    textTransform: 'uppercase',
+                                                    marginTop: '10px',
+                                                    cursor: 'pointer',
+                                                }}
+                                                type="submit"
+                                            >Sign In</Button>
                                         </Form>
                                     </Card.Body>
                                 </div>
@@ -84,12 +114,25 @@ const LoginComponent = () => {
                                         <div className="toggle-panel toggle-left">
                                             <h1>Welcome Back!</h1>
                                             <p>Enter your personal details to use all of site features</p>
-                                            <Button variant="outline-light" onClick={toggleForm}>Sign In</Button>
+                                            <Button
+                                                variant="outline-light"
+                                                className="btn btn-outline-light text-uppercase mt-2"
+                                                style={{ fontSize: '12px', padding: '10px 45px', fontWeight: 600, letterSpacing: '0.5px', cursor: 'pointer' }}
+                                                onClick={toggleForm}
+                                            >Sign In</Button>
                                         </div>
                                         <div className="toggle-panel toggle-right">
                                             <h1>Hello, Friend!</h1>
                                             <p>Register with your personal details to use all of site features</p>
-                                            <Button variant="outline-light" onClick={toggleForm}>Sign Up</Button>
+                                            <Button
+                                                variant="outline-light"
+                                                className="btn btn-outline-light text-uppercase mt-2"
+                                                style={{ fontSize: '12px', padding: '10px 45px', fontWeight: 600, letterSpacing: '0.5px', cursor: 'pointer' }}
+                                                onClick={toggleForm}
+                                            >
+                                                Sign Up
+                                            </Button>
+
                                         </div>
                                     </div>
                                 </div>
