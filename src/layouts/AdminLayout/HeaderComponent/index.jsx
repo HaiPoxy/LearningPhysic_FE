@@ -1,5 +1,5 @@
 import React from 'react';
-import {AppBar, Avatar, IconButton, Menu, MenuItem, Toolbar, Tooltip, Typography} from '@mui/material';
+import {Avatar, Box, Divider, IconButton, Menu, MenuItem, Toolbar, Tooltip, Typography} from '@mui/material';
 import MenuIcon from '@mui/icons-material/Menu';
 
 function HeaderComponent() {
@@ -14,9 +14,10 @@ function HeaderComponent() {
     };
 
     return (
-        <AppBar
+        <Box
             position="static"
-            color=''
+            color='default'
+            sx={{p: 2, borderBottom: '1px solid', borderColor: 'divider'}}
         >
             <Toolbar>
                 <IconButton edge="start" color="inherit" aria-label="menu">
@@ -52,7 +53,8 @@ function HeaderComponent() {
                     <MenuItem onClick={handleCloseUserMenu}>Đăng xuất</MenuItem>
                 </Menu>
             </Toolbar>
-        </AppBar>
+            <Divider/>
+        </Box>
     );
 }
 

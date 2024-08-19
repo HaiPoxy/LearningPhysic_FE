@@ -10,7 +10,7 @@ function AdminLayout(props) {
         <Box sx={{display: 'flex', minHeight: '100vh', flexDirection: 'column'}}>
             <Box
                 component="header"
-                sx={{width: '100%', height: '64px', bgcolor: 'background.default'}}
+                sx={{height: '64px', marginLeft: '250px', bgcolor: 'background.default'}}
             >
                 <HeaderComponent/>
             </Box>
@@ -47,11 +47,8 @@ function AdminLayout(props) {
             <Box
                 component="footer"
                 sx={{
-                    width: 'calc(100% - 250px)',
                     marginLeft: '250px',
                     bgcolor: 'background.default',
-                    // position: 'fixed',
-                    bottom: 0,
                     padding: 3,
                 }}
             >
