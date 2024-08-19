@@ -1,28 +1,63 @@
 import React from 'react';
-import {Outlet} from "react-router-dom";
-import HeaderComponent from "./HeaderComponent/index.jsx";
-import FooterComponent from "./FooterComponent/index.jsx";
-import SideBarComponent from "./SideBarComponent/index.jsx";
-import {Container} from "react-bootstrap";
+import {Outlet} from 'react-router-dom';
+import HeaderComponent from './HeaderComponent';
+import FooterComponent from './FooterComponent';
+import SideBarComponent from './SideBarComponent';
+import {Box} from '@mui/material';
 
 function AdminLayout(props) {
     return (
-        <Container fluid style={{minHeight: '100vh', minWidth: '100%'}} className="p-0">
-            <header className="bg-dark text-white p-3" style={{width: '100%'}}>
+        <Box sx={{display: 'flex', minHeight: '100vh', flexDirection: 'column'}}>
+            <Box
+                component="header"
+                sx={{width: '100%', height: '64px', bgcolor: 'background.default'}}
+            >
                 <HeaderComponent/>
-            </header>
-            <div className="d-flex flex-grow-1">
-                <aside className="bg-secondary p-3" style={{width: '250px', minHeight: '100vh'}}>
+            </Box>
+
+            <Box sx={{display: 'flex', flex: 1}}>
+                <Box
+                    component="aside"
+                    sx={{
+                        width: '250px',
+                        position: 'fixed',
+                        top: 0,
+                        bottom: 0,
+                        bgcolor: 'background.default',
+                        display: {xs: 'none', sm: 'block'},
+                    }}
+                >
                     <SideBarComponent/>
-                </aside>
-                <main className="flex-grow-1 p-4 bg-light">
+                </Box>
+
+                <Box
+                    component="main"
+                    sx={{
+                        flexGrow: 1,
+                        marginLeft: '250px',
+                        padding: 4,
+                        bgcolor: 'background.default',
+                        minHeight: 'calc(100vh - 64px)',
+                    }}
+                >
                     <Outlet/>
-                </main>
-            </div>
-            <footer className="bg-dark text-white p-3">
+                </Box>
+            </Box>
+
+            <Box
+                component="footer"
+                sx={{
+                    width: 'calc(100% - 250px)',
+                    marginLeft: '250px',
+                    bgcolor: 'background.default',
+                    // position: 'fixed',
+                    bottom: 0,
+                    padding: 3,
+                }}
+            >
                 <FooterComponent/>
-            </footer>
-        </Container>
+            </Box>
+        </Box>
     );
 }
 
