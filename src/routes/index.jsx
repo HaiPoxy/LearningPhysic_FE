@@ -1,8 +1,8 @@
-import React from 'react';
 import AnonymousLayout from "../layouts/AnonymousLayout/index.jsx";
 import UserLayout from "../layouts/UserLayout/index.jsx";
 import AdminLayout from "../layouts/AdminLayout/index.jsx";
-import {HomePage, LoginComponent} from '../pages' ;
+import {HomePage, LoginComponent} from '../pages';
+
 export const routeItems = [
     {
         layout: AnonymousLayout,
@@ -32,10 +32,10 @@ export const routeItems = [
         layout: AdminLayout,
         routes: [
             {
-                name: 'home',
-                title: 'Home page',
+                name: 'dashboard',
+                title: 'Dashboard',
                 component: HomePage,
-                path: '/admin'
+                path: '/dashboard'
             },
         ]
     },
