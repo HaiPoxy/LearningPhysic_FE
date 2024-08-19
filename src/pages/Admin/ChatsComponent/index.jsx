@@ -243,7 +243,10 @@ function ChatsComponent() {
                     </Table>
 
                     {/* Pagination */}
-                    <Box sx={{display: 'flex', justifyContent: 'center', mt: 3}}>
+                    <Box sx={{display: 'flex', justifyContent: 'space-between', alignItems: 'center', mt: 3}}>
+                        <Typography variant="body2">
+                            Total Pages: {3}
+                        </Typography>
                         <Pagination count={3} color="primary"/>
                     </Box>
                 </CardContent>
