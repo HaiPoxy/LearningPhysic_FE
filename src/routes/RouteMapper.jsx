@@ -1,12 +1,13 @@
-import {Route, Routes} from 'react-router-dom';
+import {Navigate, Route, Routes} from 'react-router-dom';
 import {routeItems} from './index.jsx';
 import PrivateRoute from "./PrivateRoute.jsx";
+
 
 const RouteMapper = () => {
     return (
         <Routes>
             {routeItems.map((routeItem, index) => (
-                <Route key={index}>
+                <Route key={index} element={<routeItem.layout/>}>
                     {routeItem.routes.map((route, subIndex) => (
                         <Route
                             key={subIndex}
@@ -15,7 +16,6 @@ const RouteMapper = () => {
                                 route.isPublic ? (
                                     <route.component/>
                                 ) : (
-                                    //Kiểm tra login
                                     <PrivateRoute>
                                         <route.component/>
                                     </PrivateRoute>
@@ -25,8 +25,10 @@ const RouteMapper = () => {
                     ))}
                 </Route>
             ))}
+            <Route path="*" element={<Navigate to="/404page" replace/>}/>
         </Routes>
     );
 };
+
 
 export default RouteMapper;

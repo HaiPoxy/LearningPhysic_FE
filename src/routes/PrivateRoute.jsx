@@ -1,8 +1,5 @@
-import React from 'react';
-import {Navigate} from 'react-router-dom';
-import {jwtDecode} from 'jwt-decode'; // Ensure correct import
-import AdminLayout from "../layouts/AdminLayout/index.jsx";
-import UserLayout from "../layouts/UserLayout/index.jsx";
+import {jwtDecode} from "jwt-decode";
+import {Navigate} from "react-router-dom";
 
 const PrivateRoute = ({children}) => {
     const token = localStorage.getItem('authToken');
@@ -28,18 +25,19 @@ const PrivateRoute = ({children}) => {
         return <Navigate to="/login"/>;
     }
 
-    // Ngăn chặn role USER truy cập vào trang ADMIN
     if (userRole === 'USER' && window.location.pathname.startsWith('/admin')) {
         return <Navigate to="/homepage"/>;
     }
-
-    if (userRole === 'ADMIN') {
-        return <AdminLayout>{children}</AdminLayout>;
-    } else if (userRole === 'USER') {
-        return <UserLayout>{children}</UserLayout>;
-    } else {
-        return <Navigate to="/login"/>;
-    }
+    // //
+    // // if (userRole === 'ADMIN') {
+    // //     return <AdminLayout>{children}</AdminLayout>;
+    // // } else if (userRole === 'USER') {
+    // //     return <UserLayout>{children}</UserLayout>;
+    // // } else {
+    // //     return <Navigate to="/login"/>;
+    // // }
+    return children
 };
+
 
 export default PrivateRoute;
