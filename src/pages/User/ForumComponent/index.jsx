@@ -67,7 +67,7 @@ function ForumComponent() {
             <Grid container mt={3} justifyContent="center">
                 <Grid item>
                     <Box display="flex" gap={1}>
-                        {['Tất cả', 'Câu hỏi hay', 'Chưa trả lời', 'Câu hỏi của bạn', 'Câu hỏi yêu thích'].map((text) => (
+                        {['Tất cả', 'Câu hỏi hay', 'Chưa trả lời', 'Câu hỏi của bạn', 'Câu hỏi đã lưu'].map((text) => (
                             <Button key={text} variant="outlined" color="primary">
                                 {text}
                             </Button>
