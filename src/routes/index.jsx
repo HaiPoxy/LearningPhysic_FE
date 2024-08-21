@@ -15,7 +15,8 @@ import {
     LoginComponent,
     LogoutComponent,
     NotFoundComponent,
-    QuestionsComponent
+    QuestionsComponent,
+    ResetPasswordComponent
 } from '../pages';
 
 export const routeItems = [
@@ -44,6 +45,14 @@ export const routeItems = [
                 icon: "nav-icon fas fa-tachometer-alt",
                 component: NotFoundComponent,
                 path: '/404page',
+                isPublic: true,
+            },
+            {
+                name: 'resetpassword',
+                title: 'Reset Password Page',
+                icon: "nav-icon fas fa-tachometer-alt",
+                component: ResetPasswordComponent,
+                path: '/resetpassword',
                 isPublic: true,
             }
         ]
