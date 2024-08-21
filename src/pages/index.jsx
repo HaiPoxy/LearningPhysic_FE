@@ -9,10 +9,13 @@ import ChatsComponent from './Admin/ChatsComponent'
 import EbooksComponent from './Admin/EbooksComponent'
 import LecturesComponent from './Admin/LecturesComponent'
 import CoursesComponent from './Admin/CoursesComponent'
+import LogoutComponent from './LogoutComponent'
+import NotFoundComponent from './NotFoundComponent'
 
 export {
     HomePage,
     LoginComponent,
+    LogoutComponent,
     DashboardComponent,
     QuestionsComponent,
     ExamsComponent,
@@ -21,5 +24,6 @@ export {
     ChatsComponent,
     EbooksComponent,
     LecturesComponent,
-    CoursesComponent
+    CoursesComponent,
+    NotFoundComponent
 };

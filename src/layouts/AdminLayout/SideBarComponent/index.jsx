@@ -45,20 +45,20 @@ function SideBarComponent() {
     };
 
     const menuItems = [
-        {id: 'dashboard', icon: <Dashboard/>, text: 'Dashboard', path: '/dashboard'},
+        {id: 'dashboard', icon: <Dashboard/>, text: 'Dashboard', path: '/admin/dashboard'},
         {
             id: 'questions',
             icon: <QuestionAnswer/>,
             text: 'Quản lý Câu hỏi - Đáp án (Bài tập)',
-            path: '/questions'
+            path: '/admin/questions'
         },
-        {id: 'exams', icon: <FileCopy/>, text: 'Quản lý Đề thi - Đáp án', path: '/exams'},
-        {id: 'accounts', icon: <AccountCircle/>, text: 'Quản lý tài khoản', path: '/accounts'},
-        {id: 'articles', icon: <Article/>, text: 'Quản lý bài viết', path: '/articles'},
-        {id: 'chats', icon: <Chat/>, text: 'Quản lý phần hỏi đáp', path: '/chats'},
-        {id: 'ebooks', icon: <Book/>, text: 'Quản lý ebook', path: '/ebooks'},
-        {id: 'lectures', icon: <School/>, text: 'Quản lý bài giảng', path: '/lectures'},
-        {id: 'courses', icon: <School/>, text: 'Quản lý khóa học', path: '/courses'},
+        {id: 'exams', icon: <FileCopy/>, text: 'Quản lý Đề thi - Đáp án', path: '/admin/exams'},
+        {id: 'accounts', icon: <AccountCircle/>, text: 'Quản lý tài khoản', path: '/admin/accounts'},
+        {id: 'articles', icon: <Article/>, text: 'Quản lý bài viết', path: '/admin/articles'},
+        {id: 'chats', icon: <Chat/>, text: 'Quản lý phần hỏi đáp', path: '/admin/chats'},
+        {id: 'ebooks', icon: <Book/>, text: 'Quản lý ebook', path: '/admin/ebooks'},
+        {id: 'lectures', icon: <School/>, text: 'Quản lý bài giảng', path: '/admin/lectures'},
+        {id: 'courses', icon: <School/>, text: 'Quản lý khóa học', path: '/admin/courses'},
     ];
 
     return (

@@ -4,7 +4,8 @@ import {Outlet} from "react-router-dom";
 function UserLayout(props) {
     return (
         <>
-                <Outlet />
+            <h1>UserLayour</h1>
+            <Outlet/>
         </>
     );
 }

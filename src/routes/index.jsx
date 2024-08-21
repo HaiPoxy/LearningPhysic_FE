@@ -12,6 +12,8 @@ import {
     HomePage,
     LecturesComponent,
     LoginComponent,
+    LogoutComponent,
+    NotFoundComponent,
     QuestionsComponent
 } from '../pages';
 
@@ -21,10 +23,26 @@ export const routeItems = [
         routes: [
             {
                 name: 'login',
-                title: 'Login page',
+                title: 'Login Page',
                 icon: "nav-icon fas fa-tachometer-alt",
                 component: LoginComponent,
                 path: '/login',
+                isPublic: true,
+            },
+            {
+                name: 'logout',
+                title: 'Logout Page',
+                icon: "nav-icon fas fa-tachometer-alt",
+                component: LogoutComponent,
+                path: '/logout',
+                isPublic: true,
+            },
+            {
+                name: 'notfound',
+                title: 'Not Found Page',
+                icon: "nav-icon fas fa-tachometer-alt",
+                component: NotFoundComponent,
+                path: '/404page',
                 isPublic: true,
             }
         ]
@@ -34,10 +52,10 @@ export const routeItems = [
         routes: [
             {
                 name: 'home',
-                title: 'Home page',
+                title: 'Home Page',
                 component: HomePage,
-                path: '/home'
-            },
+                path: '/homepage'
+            }
         ]
     },
     {
@@ -47,58 +65,56 @@ export const routeItems = [
                 name: 'dashboard',
                 title: 'Dashboard',
                 component: DashboardComponent,
-                path: '/dashboard'
+                path: '/admin/dashboard'
             },
             {
                 name: 'questions',
                 title: 'Questions',
                 component: QuestionsComponent,
-                path: '/questions'
+                path: '/admin/questions'
             },
             {
                 name: 'exams',
                 title: 'Exams',
                 component: ExamsComponent,
-                path: '/exams'
+                path: '/admin/exams'
             },
             {
                 name: 'accounts',
                 title: 'Accounts',
                 component: AccountsComponent,
-                path: '/accounts'
+                path: '/admin/accounts'
             },
             {
                 name: 'articles',
                 title: 'Articles',
                 component: ArticlesComponent,
-                path: '/articles'
+                path: '/admin/articles'
             },
             {
                 name: 'chats',
                 title: 'Chats',
-                component: ChatsComponent,  // Ensure you have this component defined
-                path: '/chats'
+                component: ChatsComponent,
+                path: '/admin/chats'
             },
             {
                 name: 'ebooks',
                 title: 'Ebooks',
-                component: EbooksComponent,  // Ensure you have this component defined
-                path: '/ebooks'
+                component: EbooksComponent,
+                path: '/admin/ebooks'
             },
             {
                 name: 'lectures',
                 title: 'Lectures',
-                component: LecturesComponent,  // Ensure you have this component defined
-                path: '/lectures'
+                component: LecturesComponent,
+                path: '/admin/lectures'
             },
             {
                 name: 'courses',
                 title: 'Courses',
-                component: CoursesComponent,  // Ensure you have this component defined
-                path: '/courses'
+                component: CoursesComponent,
+                path: '/admin/courses'
             }
         ]
-    },
-
-
+    }
 ];

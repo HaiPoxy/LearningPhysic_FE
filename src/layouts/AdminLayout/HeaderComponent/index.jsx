@@ -1,16 +1,21 @@
 import React from 'react';
 import {Avatar, Box, Divider, IconButton, Menu, MenuItem, Toolbar, Tooltip, Typography} from '@mui/material';
 import MenuIcon from '@mui/icons-material/Menu';
+import {useNavigate} from "react-router-dom";
 
 function HeaderComponent() {
     const [anchorElUser, setAnchorElUser] = React.useState(null);
-
+    const navigate = useNavigate();
     const handleOpenUserMenu = (event) => {
         setAnchorElUser(event.currentTarget);
     };
 
     const handleCloseUserMenu = () => {
         setAnchorElUser(null);
+    };
+    const handleLogout = () => {
+        handleCloseUserMenu();
+        navigate('/logout');
     };
 
     return (
@@ -50,7 +55,7 @@ function HeaderComponent() {
                     onClose={handleCloseUserMenu}
                 >
                     <MenuItem onClick={handleCloseUserMenu}>Quản lý thông tin</MenuItem>
-                    <MenuItem onClick={handleCloseUserMenu}>Đăng xuất</MenuItem>
+                    <MenuItem onClick={handleLogout}>Đăng xuất</MenuItem>
                 </Menu>
             </Toolbar>
             <Divider/>
