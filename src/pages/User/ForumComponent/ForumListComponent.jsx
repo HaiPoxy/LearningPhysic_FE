@@ -1,41 +1,82 @@
 import React, {useState} from 'react';
-import {Avatar, Box, Button, Card, CardContent, Divider, IconButton, TextField, Typography,} from '@mui/material';
+import {
+    Avatar,
+    Box,
+    Button,
+    Card,
+    CardContent,
+    Divider,
+    IconButton,
+    Pagination,
+    TextField,
+    Typography,
+} from '@mui/material';
 import {FavoriteBorder} from '@mui/icons-material';
 
 function ForumListComponent() {
-    const [showReplyInput, setShowReplyInput] = useState(null);
+    const [showReplyInput, setShowReplyInput] = useState({});
     const [replies, setReplies] = useState({});
     const [showAllComments, setShowAllComments] = useState({});
+    const [currentPage, setCurrentPage] = useState(1);
+    const commentsPerPage = 2;
 
-    const handleReplyClick = (index) => {
-        setShowReplyInput(index);
+    const data = [
+        {
+            id: 1,
+            name: "Nông Văn Điền",
+            avatar: "NVĐ",
+            timestamp: "22 giờ trước",
+            content: "Một vật thể có khối lượng 5 kg được thả rơi tự do từ độ cao 10 mét. Hãy tính vận tốc của vật khi chạm đất. Biết rằng gia tốc trọng trường là 9,8 m/s².",
+            comments: [
+                {
+                    name: "Nguyễn Văn A",
+                    comment: "Vận tốc khi chạm đất khoảng 14 m/s.",
+                    commentchilds: [
+                        {name: "Trần Thị B", comment: "Có thể tính bằng công thức v = √(2 * g * h)."},
+                        {name: "Lê Văn C", comment: "Câu hỏi này rất hay!"},
+                    ],
+                },
+                {name: "Trần Thị B", comment: "Có thể tính bằng công thức v = √(2 * g * h)."},
+                {name: "Lê Văn C", comment: "Câu hỏi này rất hay!"},
+            ],
+        },
+    ];
+
+    const handlePageChange = (event, value) => {
+        setCurrentPage(value);
     };
 
-    const handleReplySubmit = (index, value) => {
+    const handleReplyClick = (commentIndex) => {
+        setShowReplyInput((prevShowReplyInput) => ({
+            ...prevShowReplyInput,
+            [commentIndex]: !prevShowReplyInput[commentIndex],
+        }));
+    };
+
+    const handleReplySubmit = (commentIndex, value) => {
         if (!value.trim()) return;
         setReplies((prevReplies) => ({
             ...prevReplies,
-            [index]: [...(prevReplies[index] || []), value],
+            [commentIndex]: [...(prevReplies[commentIndex] || []), value],
         }));
-        setShowReplyInput(null);
-        setShowAllComments((prevShowAllComments) => ({
-            ...prevShowAllComments,
-            [index]: true,
+        setShowReplyInput((prevShowReplyInput) => ({
+            ...prevShowReplyInput,
+            [commentIndex]: false,
         }));
     };
 
-    const handleShowAllComments = (index) => {
+    const handleShowAllComments = (commentIndex) => {
         setShowAllComments((prevShowAllComments) => ({
             ...prevShowAllComments,
-            [index]: true,
+            [commentIndex]: true,
         }));
     };
 
     return (
         <>
-            {[...Array(5)].map((_, index) => (
+            {data.map((item, index) => (
                 <Card
-                    key={index}
+                    key={item.id}
                     sx={{
                         mb: 3,
                         position: 'relative',
@@ -48,11 +89,11 @@ function ForumListComponent() {
                 >
                     <CardContent sx={{textAlign: 'left'}}>
                         <Box display="flex" alignItems="center">
-                            <Avatar sx={{bgcolor: 'red', mr: 2}}>NVĐ</Avatar>
+                            <Avatar sx={{bgcolor: 'red', mr: 2}}>{item.avatar}</Avatar>
                             <Box>
-                                <Typography variant="h6">Nông Văn Điền</Typography>
+                                <Typography variant="h6">{item.name}</Typography>
                                 <Typography variant="caption" color="text.secondary">
-                                    22 giờ trước
+                                    {item.timestamp}
                                 </Typography>
                             </Box>
                             <IconButton
@@ -66,10 +107,7 @@ function ForumListComponent() {
                                 <FavoriteBorder fontSize="normal"/>
                             </IconButton>
                         </Box>
-                        <Typography sx={{mt: 1.5}}>
-                            Một vật thể có khối lượng 5 kg được thả rơi tự do từ độ cao 10 mét. Hãy tính vận tốc của vật
-                            khi chạm đất. Biết rằng gia tốc trọng trường là 9,8 m/s².
-                        </Typography>
+                        <Typography sx={{mt: 1.5}}>{item.content}</Typography>
                         <Divider
                             sx={{
                                 my: 2,
@@ -78,24 +116,30 @@ function ForumListComponent() {
                             }}
                         />
                         <Box sx={{mb: 3}}>
-                            {[
-                                {name: 'Nguyễn Văn A', comment: 'Vận tốc khi chạm đất khoảng 14 m/s.'},
-                                {name: 'Trần Thị B', comment: 'Có thể tính bằng công thức v = √(2 * g * h).'},
-                                {name: 'Lê Văn C', comment: 'Câu hỏi này rất hay!'},
-                            ].map((user, i) => (
+                            {item.comments.map((user, i) => (
                                 <Box key={i} sx={{mb: 1}}>
                                     <Typography variant="body2" color="text.secondary">
                                         <strong>{user.name}:</strong> {user.comment}
                                     </Typography>
+                                    {showAllComments[i] ? (
+                                        user.commentchilds?.map((child, j) => (
+                                            <Typography
+                                                key={j}
+                                                variant="body2"
+                                                sx={{mt: 1, ml: 4}}
+                                            >
+                                                <strong>{child.name}:</strong> {child.comment}
+                                            </Typography>
+                                        ))
+                                    ) : (
+                                        <Button size="small" onClick={() => handleShowAllComments(i)}>
+                                            Xem thêm
+                                        </Button>
+                                    )}
                                     <Button size="small" onClick={() => handleReplyClick(i)}>
                                         Trả lời
                                     </Button>
-                                    {!showAllComments[i] && (
-                                        <Button size="small" onClick={() => handleShowAllComments(i)}>
-                                            Xem
-                                        </Button>
-                                    )}
-                                    {showReplyInput === i && (
+                                    {showReplyInput[i] && (
                                         <Box sx={{mt: 1}}>
                                             <TextField
                                                 fullWidth
@@ -111,7 +155,7 @@ function ForumListComponent() {
                                             />
                                         </Box>
                                     )}
-                                    {showAllComments[i] && replies[i] &&
+                                    {replies[i] &&
                                         replies[i].map((reply, idx) => (
                                             <Typography
                                                 key={idx}
@@ -136,6 +180,12 @@ function ForumListComponent() {
                     </CardContent>
                 </Card>
             ))}
+            <Pagination
+                count={Math.ceil(data.length / commentsPerPage)}
+                page={currentPage}
+                onChange={handlePageChange}
+                sx={{mt: 2, display: 'flex', justifyContent: 'center'}}
+            />
         </>
     );
 }
