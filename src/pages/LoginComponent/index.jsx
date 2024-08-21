@@ -12,6 +12,7 @@ const LoginComponent = () => {
     const [action, setAction] = useState('');
     const [email, setEmail] = useState('');
     const [password, setPassword] = useState('');
+    const [fullName, setFullName] = useState('');
     const navigate = useNavigate();
     const [errorLogin, setErrorLogin] = useState(false); // State for handling Snackbar visibility
 
@@ -36,6 +37,26 @@ const LoginComponent = () => {
             }
         );
     };
+    const handleSignUp = (e) => {
+        event.preventDefault();
+        console.log("email: " + email + " password: " + password);
+
+        axios.post(API.REGISTER, {
+            email,
+            password,
+            fullName,
+            "role": "USER"
+        }).then(
+            (res) => {
+                setAction('');
+            }
+        ).catch(
+            (error) => {
+                console.error("Error during Sign Up:", error);
+                setErrorLogin(true);
+            }
+        );
+    }
 
     const handleCloseAlert = () => {
         setErrorLogin(false); // Close Snackbar
@@ -72,11 +93,14 @@ const LoginComponent = () => {
                                     </Button>
                                 </div>
                                 <span>hoặc sử dung email để đăng ký</span>
-                                <Form>
+                                <Form onSubmit={handleSignUp}>
                                     <Row className='justify-content-center align-items-center'>
                                         <Col xs={12} md={10}>
-                                            <Form.Group controlId="name">
-                                                <Form.Control type="text" placeholder="Name"/>
+                                            <Form.Group controlId="fullName">
+                                                <Form.Control type="text" placeholder="Full Name"
+                                                              value={fullName}
+                                                              onChange={(e) => setFullName(e.target.value)}
+                                                />
                                             </Form.Group>
                                         </Col>
                                     </Row>
@@ -84,14 +108,20 @@ const LoginComponent = () => {
                                     <Row className='justify-content-center align-items-center'>
                                         <Col xs={12} md={10}>
                                             <Form.Group controlId="email">
-                                                <Form.Control type="email" placeholder="Email"/>
+                                                <Form.Control type="email" placeholder="Email"
+                                                              value={email}
+                                                              onChange={(e) => setEmail(e.target.value)}
+                                                />
                                             </Form.Group>
                                         </Col>
                                     </Row>
                                     <Row className='justify-content-center align-items-center'>
                                         <Col xs={12} md={10}>
                                             <Form.Group controlId="password">
-                                                <Form.Control type="password" placeholder="Password"/>
+                                                <Form.Control type="password" placeholder="Password"
+                                                              value={password}
+                                                              onChange={(e) => setPassword(e.target.value)}
+                                                />
                                             </Form.Group>
                                         </Col>
                                     </Row>
