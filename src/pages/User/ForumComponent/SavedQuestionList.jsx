@@ -1,3 +1,5 @@
+// SavedQuestionList
+
 import React, {useState} from 'react';
 import {
     Avatar,
@@ -13,7 +15,7 @@ import {
 } from '@mui/material';
 import {FavoriteBorder} from '@mui/icons-material';
 
-function ForumListComponent() {
+function SavedQuestionList() {
     const [showReplyInput, setShowReplyInput] = useState({});
     const [replies, setReplies] = useState({});
     const [showAllComments, setShowAllComments] = useState({});
@@ -190,4 +192,6 @@ function ForumListComponent() {
     );
 }
 
-export default ForumListComponent;
+export default SavedQuestionList;
+
+

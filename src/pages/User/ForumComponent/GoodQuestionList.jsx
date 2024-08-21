@@ -13,7 +13,7 @@ import {
 } from '@mui/material';
 import {FavoriteBorder} from '@mui/icons-material';
 
-function ForumListComponent() {
+function GoodQuestionList() {
     const [showReplyInput, setShowReplyInput] = useState({});
     const [replies, setReplies] = useState({});
     const [showAllComments, setShowAllComments] = useState({});
@@ -190,4 +190,4 @@ function ForumListComponent() {
     );
 }
 
-export default ForumListComponent;
+export default GoodQuestionList;
