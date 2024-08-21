@@ -4,7 +4,7 @@ import {Outlet} from "react-router-dom";
 function UserLayout(props) {
     return (
         <>
-                <Outlet />
+            <Outlet/>
         </>
     );
 }
