@@ -11,6 +11,7 @@ import LecturesComponent from './Admin/LecturesComponent'
 import CoursesComponent from './Admin/CoursesComponent'
 import LogoutComponent from './LogoutComponent'
 import NotFoundComponent from './NotFoundComponent'
+import ForumComponent from './User/ForumComponent'
 
 export {
     HomePage,
@@ -25,5 +26,6 @@ export {
     EbooksComponent,
     LecturesComponent,
     CoursesComponent,
-    NotFoundComponent
+    NotFoundComponent,
+    ForumComponent,
 };

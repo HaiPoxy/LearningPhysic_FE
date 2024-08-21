@@ -9,6 +9,7 @@ import {
     DashboardComponent,
     EbooksComponent,
     ExamsComponent,
+    ForumComponent,
     HomePage,
     LecturesComponent,
     LoginComponent,
@@ -55,6 +56,12 @@ export const routeItems = [
                 title: 'Home Page',
                 component: HomePage,
                 path: '/homepage'
+            },
+            {
+                name: 'forum',
+                title: 'Forum Page',
+                component: ForumComponent,
+                path: '/forum'
             }
         ]
     },
