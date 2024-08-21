@@ -58,6 +58,25 @@ const LoginComponent = () => {
         );
     }
 
+    const handleForgotPassword = (e) => {
+        event.preventDefault();
+        console.log("email: " + email);
+        setAction('');
+        //
+        // axios.post(API.FORGOTPASSWORD, {
+        //     email,
+        // }).then(
+        //     (res) => {
+        //         setAction('');
+        //         //Show notice Send email successfull
+        //     }
+        // ).catch(
+        //     (error) => {
+        //         console.error("Error during Sign Up:", error);
+        //         setErrorLogin(true);
+        //     }
+        // );
+    }
     const handleCloseAlert = () => {
         setErrorLogin(false); // Close Snackbar
     };
@@ -170,11 +189,13 @@ const LoginComponent = () => {
                                     </Button>
                                 </div>
                                 <span>Nhập email của bạn để khôi phục mật khẩu</span>
-                                <Form>
+                                <Form onSubmit={handleForgotPassword}>
                                     <Row className='justify-content-center align-items-center'>
                                         <Col xs={12} md={10}>
                                             <Form.Group controlId="email">
-                                                <Form.Control type="email" placeholder="Email"/>
+                                                <Form.Control type="email" placeholder="Email"
+                                                              value={email}
+                                                              onChange={() => setEmail(e.target.value)}/>
                                             </Form.Group>
                                         </Col>
                                     </Row>
