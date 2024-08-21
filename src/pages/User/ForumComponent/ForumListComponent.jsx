@@ -1,14 +1,34 @@
-import React from 'react';
+import React, {useState} from 'react';
 import {Avatar, Box, Button, Card, CardContent, Divider, IconButton, TextField, Typography,} from '@mui/material';
 import {FavoriteBorder} from '@mui/icons-material';
 
-function ForumListComponent(props) {
+function ForumListComponent() {
+    const [showReplyInput, setShowReplyInput] = useState(null);
+    const [replies, setReplies] = useState({});
+    const [showAllComments, setShowAllComments] = useState({});
+
     const handleReplyClick = (index) => {
-        // Handle reply button click
+        setShowReplyInput(index);
     };
 
     const handleReplySubmit = (index, value) => {
-        // Handle reply submission
+        if (!value.trim()) return;
+        setReplies((prevReplies) => ({
+            ...prevReplies,
+            [index]: [...(prevReplies[index] || []), value],
+        }));
+        setShowReplyInput(null);
+        setShowAllComments((prevShowAllComments) => ({
+            ...prevShowAllComments,
+            [index]: true,
+        }));
+    };
+
+    const handleShowAllComments = (index) => {
+        setShowAllComments((prevShowAllComments) => ({
+            ...prevShowAllComments,
+            [index]: true,
+        }));
     };
 
     return (
@@ -63,12 +83,19 @@ function ForumListComponent(props) {
                                 {name: 'Trần Thị B', comment: 'Có thể tính bằng công thức v = √(2 * g * h).'},
                                 {name: 'Lê Văn C', comment: 'Câu hỏi này rất hay!'},
                             ].map((user, i) => (
-                                <Typography key={i} variant="body2" color="text.secondary">
-                                    <strong>{user.name}:</strong> {user.comment}
+                                <Box key={i} sx={{mb: 1}}>
+                                    <Typography variant="body2" color="text.secondary">
+                                        <strong>{user.name}:</strong> {user.comment}
+                                    </Typography>
                                     <Button size="small" onClick={() => handleReplyClick(i)}>
                                         Trả lời
                                     </Button>
-                                    {props.showReplyInput === i && (
+                                    {!showAllComments[i] && (
+                                        <Button size="small" onClick={() => handleShowAllComments(i)}>
+                                            Xem
+                                        </Button>
+                                    )}
+                                    {showReplyInput === i && (
                                         <Box sx={{mt: 1}}>
                                             <TextField
                                                 fullWidth
@@ -82,15 +109,19 @@ function ForumListComponent(props) {
                                                     }
                                                 }}
                                             />
-                                            {props.replies[i] &&
-                                                props.replies[i].map((reply, idx) => (
-                                                    <Typography key={idx} variant="body2" sx={{mt: 1, ml: 4}}>
-                                                        {reply}
-                                                    </Typography>
-                                                ))}
                                         </Box>
                                     )}
-                                </Typography>
+                                    {showAllComments[i] && replies[i] &&
+                                        replies[i].map((reply, idx) => (
+                                            <Typography
+                                                key={idx}
+                                                variant="body2"
+                                                sx={{mt: 1, ml: 4}}
+                                            >
+                                                {reply}
+                                            </Typography>
+                                        ))}
+                                </Box>
                             ))}
                         </Box>
                         <Box display="flex" alignItems="center">
