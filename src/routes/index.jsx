@@ -16,7 +16,8 @@ import {
     LogoutComponent,
     NotFoundComponent,
     QuestionsComponent,
-    ResetPasswordComponent
+    ResetPasswordComponent,
+    ShoppingCartComponent
 } from '../pages';
 
 export const routeItems = [
@@ -67,10 +68,22 @@ export const routeItems = [
                 path: '/homepage'
             },
             {
+                name: 'home',
+                title: 'Home Page',
+                component: HomePage,
+                path: '/'
+            },
+            {
                 name: 'forum',
                 title: 'Forum Page',
                 component: ForumComponent,
                 path: '/forum'
+            },
+            {
+                name: 'ShoppingCart',
+                title: 'Shopping Cart Page',
+                component: ShoppingCartComponent,
+                path: '/shopping-cart'
             }
         ]
     },

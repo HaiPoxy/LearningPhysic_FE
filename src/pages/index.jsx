@@ -13,6 +13,7 @@ import LogoutComponent from './LogoutComponent'
 import NotFoundComponent from './NotFoundComponent'
 import ForumComponent from './User/ForumComponent'
 import ResetPasswordComponent from './ResetPasswordComponent';
+import ShoppingCartComponent from './User/ShoppingCartComponent';
 
 export {
     HomePage,
@@ -29,5 +30,6 @@ export {
     CoursesComponent,
     NotFoundComponent,
     ForumComponent,
-    ResetPasswordComponent
+    ResetPasswordComponent,
+    ShoppingCartComponent
 };
