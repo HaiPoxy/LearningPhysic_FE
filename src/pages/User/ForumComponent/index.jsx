@@ -1,4 +1,4 @@
-import React from 'react';
+import React, {useEffect, useState} from 'react';
 import {
     Badge,
     Box,
@@ -17,27 +17,63 @@ import ForumListComponent from "./ForumListComponent.jsx";
 import SidebarForumComponent from "./SidebarForumComponent.jsx";
 
 function ForumComponent() {
+    const [typePost, setTypePost] = useState('Tất cả')
+    const [grade, setGrade] = useState('')
+    const [search, setSearch] = useState('')
+    const [question, setQuestion] = useState({
+        content: "",
+        grade: ""
+    })
+    useEffect(() => {
+        console.log("typePost " + typePost)
+        console.log("grade " + grade)
+        console.log("search " + search)
+
+    }, [typePost, grade, search]);
+
+    const handleSerch = (value) => {
+        setSearch(value)
+    }
+
+    const handleQuestionChange = (event) => {
+        setQuestion({...question, content: event.target.value});
+    };
+
+    const handleGradeChange = (event) => {
+        setQuestion({...question, grade: event.target.value});
+    };
+    const handleSubmit = () => {
+        console.log('Submitted question:', question);
+    };
     return (
         <>
-            <SearchBarComponent/>
+            <SearchBarComponent onSubmit={handleSerch}/>
 
             {/* Header with Search and Buttons */}
             <Grid container spacing={2} mt={3}>
                 <Grid item xs={12}>
-                    <TextField fullWidth placeholder="Nhập câu hỏi của bạn ở đây" variant="outlined"/>
+                    <TextField
+                        fullWidth
+                        placeholder="Nhập câu hỏi của bạn ở đây"
+                        variant="outlined"
+                        value={question.content}
+                        onChange={handleQuestionChange}
+                    />
                 </Grid>
                 <Grid item xs={12} md={2} sx={{mt: 2, mb: 2}}>
                     <Select
                         fullWidth
                         variant="outlined"
-                        defaultValue="0"
+                        value={question.grade || "None"}
+                        onChange={handleGradeChange}
                         size="small"
                         sx={{
                             height: 'auto',
                             fontSize: '0.875rem',
                         }}
+
                     >
-                        <MenuItem value="0" disabled>
+                        <MenuItem value="None" disabled>
                             Chọn lớp
                         </MenuItem>
                         {[6, 7, 8, 9, 10, 11, 12].map((grade) => (
@@ -57,6 +93,7 @@ function ForumComponent() {
                             fontSize: '0.875rem',
                             ml: 0,
                         }}
+                        onClick={handleSubmit}
                     >
                         Gửi câu hỏi
                     </Button>
@@ -68,7 +105,9 @@ function ForumComponent() {
                 <Grid item>
                     <Box display="flex" gap={1}>
                         {['Tất cả', 'Câu hỏi hay', 'Chưa trả lời', 'Câu hỏi của bạn', 'Câu hỏi đã lưu'].map((text) => (
-                            <Button key={text} variant="outlined" color="primary">
+                            <Button key={text} variant="outlined" color="primary" onClick={() => {
+                                setTypePost(text)
+                            }}>
                                 {text}
                             </Button>
                         ))}
@@ -78,7 +117,7 @@ function ForumComponent() {
 
             <Grid container spacing={2} mt={3}>
                 {/* Sidebar */}
-                <SidebarForumComponent/>
+                <SidebarForumComponent onclick={(v) => setGrade(v)}/>
 
                 {/* Main Content */}
                 <Grid item xs={12} md={7}>
