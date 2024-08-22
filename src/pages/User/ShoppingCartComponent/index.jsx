@@ -13,7 +13,7 @@ function ShoppingCartComponent() {
             "title": "React for Beginners",
             "instructor": "John Doe",
             "duration": "10 hours",
-            "price": 49.99,
+            "price": 490009.9,
             "image": "https://via.placeholder.com/100"
         },
         {
@@ -21,7 +21,7 @@ function ShoppingCartComponent() {
             "title": "Mastering Node.js",
             "instructor": "Jane Smith",
             "duration": "15 hours",
-            "price": 79.99,
+            "price": 7900099,
             "image": "https://via.placeholder.com/100"
         }
     ];
@@ -46,24 +46,34 @@ function ShoppingCartComponent() {
                 <Box my={3}>
                     {cartItems.map((item) => (
                         <Paper elevation={3} sx={{p: 2, mb: 3, backgroundColor: '#ECF0F1'}} key={item.id}>
-                            <Grid container alignItems="center" spacing={2}>
+                            <Grid container spacing={2}>
                                 <Grid item xs={2}>
                                     <img src={item.image} alt={item.title}
                                          style={{width: '100%', borderRadius: '8px'}}/>
                                 </Grid>
-                                <Grid item xs={5}>
-                                    <Typography variant="h6"
-                                                sx={{fontWeight: 'bold', color: primaryColor}}>{item.title}</Typography>
-                                    <Typography variant="body2"
-                                                color="textSecondary">Instructor: {item.instructor}</Typography>
-                                    <Typography variant="body2"
-                                                color="textSecondary">Duration: {item.duration}</Typography>
+                                <Grid item xs={6} sx={{textAlign: 'left'}}>
+                                    <Typography variant="h6" sx={{
+                                        fontWeight: 'bold',
+                                        color: primaryColor,
+                                    }}>
+                                        {item.title}
+                                    </Typography>
+
+                                    <Typography variant="body2" color="textSecondary">
+                                        Giảng viên: {item.instructor}
+                                    </Typography>
+                                    <Typography variant="body2" color="textSecondary">
+                                        Thời lượng: {item.duration}
+                                    </Typography>
                                 </Grid>
-                                <Grid item xs={3}>
-                                    <Typography
-                                        sx={{fontWeight: 'bold', color: primaryColor}}>${item.price}</Typography>
+
+                                <Grid item xs={3} sx={{display: 'flex', alignItems: 'center'}}>
+                                    <Typography sx={{fontWeight: 'bold', fontSize: 25, color: primaryColor}}>
+                                        {new Intl.NumberFormat().format(item.price)}
+                                    </Typography>
                                 </Grid>
-                                <Grid item xs={2}>
+
+                                <Grid item xs={1} sx={{display: 'flex', alignItems: 'center'}}>
                                     <IconButton color="error" onClick={() => handleDelete(item.id)}>
                                         <DeleteIcon/>
                                     </IconButton>
@@ -71,9 +81,29 @@ function ShoppingCartComponent() {
                             </Grid>
                         </Paper>
                     ))}
+
                 </Box>
 
-                <Box my={3}>
+                <Divider/>
+
+                <Box my={3} textAlign="right">
+                    <Typography variant="h4" sx={{fontWeight: 'bold', color: primaryColor}}>
+                        <Typography component="span" sx={{
+                            fontSize: 20,
+                            fontWeight: 'bold'
+                        }}> {/* Kích thước nhỏ hơn cho "Tổng số tiền:" */}
+                            Tổng số tiền:
+                        </Typography>
+                        {' '}
+                        <Typography component="span"
+                                    sx={{color: 'red', fontSize: 30, fontWeight: 'bold'}}> {/* Màu đỏ cho số tiền */}
+                            {new Intl.NumberFormat().format(1200000)} VND
+                        </Typography>
+                    </Typography>
+                </Box>
+
+
+                <Box my={10}>
                     <Button variant="contained" startIcon={<ShoppingCartIcon/>}
                             sx={{backgroundColor: primaryColor, color: '#FFFFFF'}}>
                         Tiếp tục mua sắm
