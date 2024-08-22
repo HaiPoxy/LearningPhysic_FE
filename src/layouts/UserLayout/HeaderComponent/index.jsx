@@ -1,12 +1,43 @@
-import {Button} from "@mui/material";
+import {Box, Button, Typography} from "@mui/material";
+import ShoppingCartIcon from '@mui/icons-material/ShoppingCart';
+import {useState} from "react";
+import {useNavigate} from "react-router-dom";
 
 function HeaderComponent(props) {
+    const [totalItem, setTotalItem] = useState(10);
+    const navigate = useNavigate();
     return (
         <>
             <div className="d-flex flex-column">
                 <div className="d-flex justify-content-between align-items-center py-3">
                     <h1 className="h3">Learning System</h1>
                     <div>
+                        <Box position="relative" display="inline-block" sx={{marginRight: 5}}>
+                            <ShoppingCartIcon style={{fontSize: '40px'}} onClick={() => {
+                                navigate("/shopping-cart")
+                            }}/>
+                            <Typography
+                                variant="body2"
+                                sx={{
+                                    position: 'absolute',
+                                    top: '-15px',
+                                    right: '-24px',
+                                    width: '40px',
+                                    height: '40px',
+                                    backgroundColor: 'red',
+                                    color: 'white',
+                                    fontSize: '25px',
+                                    borderRadius: '50%',
+                                    transform: 'translate(-12px, 0) scale(0.50)',
+                                    display: 'flex',
+                                    alignItems: 'center',
+                                    justifyContent: 'center',
+                                    textAlign: 'center',
+                                }}
+                            >
+                                {totalItem}
+                            </Typography>
+                        </Box>
                         <Button variant="contained" color="primary">
                             Đăng nhập
                         </Button>
