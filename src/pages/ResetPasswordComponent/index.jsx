@@ -2,15 +2,36 @@ import React, {useState} from 'react';
 import {Form} from "react-bootstrap";
 import {Button, Card, TextField, Typography} from "@mui/material";
 import './ResetPassword.scss';
+import API from "../../store/api.jsx";
+import axios from "axios";
+import {useNavigate} from "react-router-dom";
 
 function ResetPasswordComponent() {
     const [password, setPassword] = useState('');
     const [rePassword, setRePassword] = useState('');
+    const navigate = useNavigate();
 
     const handleSubmit = (e) => {
         e.preventDefault();
         console.log("Password: " + password + " Re-Password: " + rePassword);
-        // Add further logic for password reset here
+
+        const queryParams = new URLSearchParams(window.location.search);
+        const path = API.RESETPASSWORD + '?token=' + queryParams.get('token');
+
+        console.log("Current Path: " + path);
+
+        axios.post(path, {
+            "newPassword": password
+        }).then(
+            (res) => {
+                console.log("Đổi mật khẩu thành công!");
+                navigate("./login");
+            }
+        ).catch(
+            (error) => {
+                console.error("Error during password reset:", error);
+            }
+        );
     };
 
     return (

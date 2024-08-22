@@ -52,7 +52,7 @@ export const routeItems = [
                 title: 'Reset Password Page',
                 icon: "nav-icon fas fa-tachometer-alt",
                 component: ResetPasswordComponent,
-                path: '/resetpassword',
+                path: '/reset-password',
                 isPublic: true,
             }
         ]
