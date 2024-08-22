@@ -4,6 +4,7 @@ const API = {
     LOGIN: `${BASE_URL}/auth/login`,
     REGISTER: `${BASE_URL}/auth/register`,
     FORGOTPASSWORD: `${BASE_URL}/auth/register`,
+    SENDTOEMAIL: `${BASE_URL}/auth/send-to-email`,
 };
 
 export default API;

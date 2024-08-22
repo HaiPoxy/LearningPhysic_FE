@@ -6,7 +6,7 @@ import {FaFacebook, FaGithub, FaGoogle, FaLinkedin} from "react-icons/fa";
 import axios from "axios";
 import API from "../../store/api.jsx";
 import {useNavigate} from "react-router-dom";
-import {Alert, Snackbar} from "@mui/material";
+import {Alert, CircularProgress, Snackbar} from "@mui/material";
 
 const LoginComponent = () => {
     const [action, setAction] = useState('');
@@ -57,25 +57,28 @@ const LoginComponent = () => {
             }
         );
     }
-
+    const [isSending, setIsSending] = useState(false)
     const handleForgotPassword = (e) => {
         event.preventDefault();
         console.log("email: " + email);
-        setAction('');
-        //
-        // axios.post(API.FORGOTPASSWORD, {
-        //     email,
-        // }).then(
-        //     (res) => {
-        //         setAction('');
-        //         //Show notice Send email successfull
-        //     }
-        // ).catch(
-        //     (error) => {
-        //         console.error("Error during Sign Up:", error);
-        //         setErrorLogin(true);
-        //     }
-        // );
+        setIsSending(true)
+        // setAction('');
+        const url = API.SENDTOEMAIL + '?email=' + email;
+        axios.get(url, {
+            email,
+        }).then(
+            (res) => {
+                setIsSending(false)
+                setAction('');
+                //Show notice Send email successfull
+            }
+        ).catch(
+            (error) => {
+                console.error("Error during Sign Up:", error);
+                setErrorLogin(true);
+                setIsSending(false)
+            }
+        );
     }
     const handleCloseAlert = () => {
         setErrorLogin(false); // Close Snackbar
@@ -193,19 +196,15 @@ const LoginComponent = () => {
                                     <Row className='justify-content-center align-items-center'>
                                         <Col xs={12} md={10}>
                                             <Form.Group controlId="email">
-                                                <Form.Control type="email" placeholder="Email"
-                                                              value={email}
-                                                              onChange={() => setEmail(e.target.value)}/>
+                                                <Form.Control
+                                                    type="email"
+                                                    placeholder="Email"
+                                                    value={email}
+                                                    onChange={(e) => setEmail(e.target.value)}
+                                                />
                                             </Form.Group>
                                         </Col>
                                     </Row>
-                                    {/*<Row className='justify-content-center align-items-center'>*/}
-                                    {/*    <Col xs={12} md={10}>*/}
-                                    {/*        <Form.Group controlId="password">*/}
-                                    {/*            <Form.Control type="password" placeholder="Password"/>*/}
-                                    {/*        </Form.Group>*/}
-                                    {/*    </Col>*/}
-                                    {/*</Row>*/}
                                     <Row className='justify-content-center align-items-center'>
                                         <Col xs={12} md={10}>
                                             <Button
@@ -221,9 +220,13 @@ const LoginComponent = () => {
                                                     textTransform: 'uppercase',
                                                     marginTop: '10px',
                                                     cursor: 'pointer',
+                                                    minWidth: '200px',
+                                                    maxHeight: '40px'
                                                 }}
                                                 type="submit"
-                                            >Quên mât khẩu
+                                                disabled={isSending}
+                                            >
+                                                {isSending ? <CircularProgress size={20}/> : 'Quên mật khẩu'}
                                             </Button>
                                         </Col>
                                     </Row>
