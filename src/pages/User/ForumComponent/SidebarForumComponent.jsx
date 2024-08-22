@@ -1,7 +1,7 @@
 import React from 'react';
 import {Grid, List, ListItem, ListItemText} from '@mui/material';
 
-function SidebarForumComponent() {
+function SidebarForumComponent({onclick}) {
     return (
         <>
             {/* Category List */}
@@ -25,10 +25,12 @@ function SidebarForumComponent() {
                                     mb: 1,
                                     '&:hover': {bgcolor: 'primary.light'},
                                 }}
+                                onClick={() => onclick(text)}
                             >
                                 <ListItemText
                                     primary={text}
                                     primaryTypographyProps={{fontWeight: 'bold', fontSize: '1rem'}}
+
                                 />
                             </ListItem>
                         )

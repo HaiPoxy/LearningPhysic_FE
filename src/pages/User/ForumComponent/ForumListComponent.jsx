@@ -13,7 +13,6 @@ import {
 } from '@mui/material';
 import {Favorite, FavoriteBorder} from '@mui/icons-material';
 
-
 function ForumListComponent() {
     const [showReplyInput, setShowReplyInput] = useState({});
     const [showAllComments, setShowAllComments] = useState({});
@@ -27,6 +26,7 @@ function ForumListComponent() {
             avatar: "NVĐ",
             timestamp: "22 giờ trước",
             content: "Một vật thể có khối lượng 5 kg được thả rơi tự do từ độ cao 10 mét. Hãy tính vận tốc của vật khi chạm đất. Biết rằng gia tốc trọng trường là 9,8 m/s².",
+            grade: 12,
             comments: [
                 {
                     name: "Nguyễn Văn A",
@@ -110,15 +110,32 @@ function ForumListComponent() {
                         <Box display="flex" alignItems="center">
                             <Avatar sx={{bgcolor: 'red', mr: 2}}>{item.avatar}</Avatar>
                             <Box>
-                                <Typography variant="h6">{item.name}</Typography>
-                                <Typography variant="caption" color="text.secondary">
-                                    {item.timestamp}
+                                <Typography variant="h6">{item.name}
                                 </Typography>
+                                <Box sx={{display: 'flex', alignItems: 'center'}}>
+                                    <Typography
+                                        variant="caption"
+                                        color="text.primary"
+                                        sx={{marginRight: 0.5}}
+                                    >
+                                        Lớp {item.grade}
+                                    </Typography>
+                                    <Typography variant="caption" color="text.secondary">
+                                        -
+                                    </Typography>
+                                    <Typography
+                                        variant="caption"
+                                        color="text.secondary"
+                                        sx={{marginLeft: 0.5}}
+                                    >
+                                        {item.timestamp}
+                                    </Typography>
+                                </Box>
                             </Box>
                             <IconButton
                                 sx={{
                                     position: 'absolute',
-                                    top: 10,
+                                    top: 20,
                                     right: 10,
                                     color: 'red',
                                 }}
