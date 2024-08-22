@@ -44,7 +44,7 @@ function HeaderComponent(props) {
                                     <a className="nav-link" href="#">Sách</a>
                                 </li>
                                 <li className="nav-item">
-                                    <a className="nav-link" href="#">Hỏi đáp</a>
+                                    <a className="nav-link" href="/forum">Hỏi đáp</a>
                                 </li>
                             </ul>
                         </div>
