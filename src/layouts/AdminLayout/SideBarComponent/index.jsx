@@ -63,6 +63,10 @@ function SideBarComponent() {
 
     return (
         <Box sx={{
+            // width: open ? 250 : 0, // Đóng/mở sidebar
+            // transition: 'width 0.3s ease', // Hiệu ứng đóng/mở
+            // overflow: 'hidden',
+            // borderRight: open ? '1px solid' : 'none',
             width: 250,
             borderRight: '1px solid',
             borderColor: 'divider',
