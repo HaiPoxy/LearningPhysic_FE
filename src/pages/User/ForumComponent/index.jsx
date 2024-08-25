@@ -12,7 +12,7 @@ import {
     TextField,
     Typography
 } from '@mui/material';
-import SearchBarComponent from "./SearchBarComponent:.jsx";
+import SearchBarComponent from "./SearchBarComponent.jsx";
 import ForumListComponent from "./ForumListComponent.jsx";
 import SidebarForumComponent from "./SidebarForumComponent.jsx";
 
