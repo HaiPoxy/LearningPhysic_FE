@@ -10,19 +10,52 @@ function ShoppingCartComponent() {
     const data = [
         {
             "id": 1,
-            "title": "React for Beginners",
-            "instructor": "John Doe",
-            "duration": "10 hours",
+            "title": "React cho Người Mới Bắt Đầu",
+            "instructor": "Lê Hoài Nam",
+            "duration": "10 giờ",
             "price": 490009.9,
-            "image": "https://via.placeholder.com/100"
+            "image": "https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcSlGmKtrnxElpqw3AExKXPWWBulcwjlvDJa1Q&s",
+            "type": "course",
+            "level": "Sơ cấp",
+            "language": "Tiếng Hindu",
+            "releaseDate": "2022-01-15"
         },
         {
             "id": 2,
-            "title": "Mastering Node.js",
-            "instructor": "Jane Smith",
-            "duration": "15 hours",
+            "title": "Thành Thạo Node.js",
+            "instructor": "Lê Hoài Nam",
+            "duration": "15 giờ",
             "price": 7900099,
-            "image": "https://via.placeholder.com/100"
+            "image": "https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcSHMTafBeJ-VJ9hVJbIxAjprXT7wvwGbIVQpA&s",
+            "type": "course",
+            "level": "Nâng cao",
+            "language": "Tiếng Trung",
+            "releaseDate": "2021-08-10"
+        },
+        {
+            "id": 3,
+            "title": "Các Mẫu React Nâng Cao",
+            "instructor": "Lê Hoài Nam",
+            "duration": "12 giờ",
+            "price": 850009.9,
+            "image": "https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcSlGmKtrnxElpqw3AExKXPWWBulcwjlvDJa1Q&s",
+            "type": "course",
+            "level": "Trung cấp",
+            "language": "Tiếng Lào",
+            "releaseDate": "2023-03-05"
+        },
+        {
+            "id": 4,
+            "title": "Học Thiết Kế Mẫu JavaScript",
+            "instructor": "Lê Hoài Nam",
+            "price": 350000,
+            "image": "https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcSlGmKtrnxElpqw3AExKXPWWBulcwjlvDJa1Q&s",
+            "type": "ebook",
+            "format": "PDF",
+            "publisher": "Nhà Xuất Bản Tech Books",
+            "pages": 250,
+            "language": "Tiếng Pháp",
+            "releaseDate": "2020-11-22"
         }
     ];
 
@@ -35,16 +68,17 @@ function ShoppingCartComponent() {
     };
 
     return (
-        <Grid container spacing={4} p={3} mt={5} mb={10}>
-            {/* Shopping Cart Section */}
+        <Grid container spacing={4} p={3} mt={3} mb={10}>
             <Grid item xs={12} md={8}>
                 <Typography variant="h4" gutterBottom sx={{fontWeight: 'bold', color: primaryColor}}>
                     Giỏ hàng của bạn
                 </Typography>
                 <Divider/>
-
-                <Box my={3}>
-                    {cartItems.map((item) => (
+            </Grid>
+            {/* Shopping Cart Section */}
+            <Grid item xs={12} md={8}>
+                <Box>
+                    {data.map((item) => (
                         <Paper elevation={3} sx={{p: 2, mb: 3, backgroundColor: '#ECF0F1'}} key={item.id}>
                             <Grid container spacing={2}>
                                 <Grid item xs={2}>
@@ -52,19 +86,41 @@ function ShoppingCartComponent() {
                                          style={{width: '100%', borderRadius: '8px'}}/>
                                 </Grid>
                                 <Grid item xs={6} sx={{textAlign: 'left'}}>
-                                    <Typography variant="h6" sx={{
-                                        fontWeight: 'bold',
-                                        color: primaryColor,
-                                    }}>
+                                    <Typography variant="h6" sx={{fontWeight: 'bold', color: primaryColor}}>
                                         {item.title}
                                     </Typography>
-
                                     <Typography variant="body2" color="textSecondary">
-                                        Giảng viên: {item.instructor}
+                                        {item.type === 'ebook' ? 'Tác giả' : 'Giảng viên'}: {item.instructor}
+                                    </Typography>
+                                    {item.type === 'course' && (
+                                        <>
+                                            <Typography variant="body2" color="textSecondary">
+                                                Thời lượng: {item.duration}
+                                            </Typography>
+                                            <Typography variant="body2" color="textSecondary">
+                                                Trình độ: {item.level}
+                                            </Typography>
+                                        </>
+                                    )}
+                                    <Typography variant="body2" color="textSecondary">
+                                        Ngôn ngữ: {item.language}
                                     </Typography>
                                     <Typography variant="body2" color="textSecondary">
-                                        Thời lượng: {item.duration}
+                                        Ngày phát hành: {new Date(item.releaseDate).toLocaleDateString()}
                                     </Typography>
+                                    {item.type === 'ebook' && (
+                                        <>
+                                            <Typography variant="body2" color="textSecondary">
+                                                Định dạng: {item.format}
+                                            </Typography>
+                                            <Typography variant="body2" color="textSecondary">
+                                                Nhà xuất bản: {item.publisher}
+                                            </Typography>
+                                            <Typography variant="body2" color="textSecondary">
+                                                Số trang: {item.pages}
+                                            </Typography>
+                                        </>
+                                    )}
                                 </Grid>
 
                                 <Grid item xs={3} sx={{display: 'flex', alignItems: 'center'}}>
@@ -81,7 +137,6 @@ function ShoppingCartComponent() {
                             </Grid>
                         </Paper>
                     ))}
-
                 </Box>
 
                 <Divider/>
