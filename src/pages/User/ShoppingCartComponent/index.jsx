@@ -81,10 +81,27 @@ function ShoppingCartComponent() {
                     {data.map((item) => (
                         <Paper elevation={3} sx={{p: 2, mb: 3, backgroundColor: '#ECF0F1'}} key={item.id}>
                             <Grid container spacing={2}>
-                                <Grid item xs={2}>
-                                    <img src={item.image} alt={item.title}
-                                         style={{width: '100%', borderRadius: '8px'}}/>
+                                <Grid
+                                    item
+                                    xs={2}
+                                    sx={{
+                                        display: 'flex',
+                                        alignItems: 'center',
+                                        justifyContent: 'center'
+                                    }}
+                                >
+                                    <img
+                                        src={item.image}
+                                        alt={item.title}
+                                        style={{
+                                            width: '100%',
+                                            height: '100%',
+                                            borderRadius: '8px',
+                                            objectFit: 'cover'
+                                        }}
+                                    />
                                 </Grid>
+
                                 <Grid item xs={6} sx={{textAlign: 'left'}}>
                                     <Typography variant="h6" sx={{fontWeight: 'bold', color: primaryColor}}>
                                         {item.title}
