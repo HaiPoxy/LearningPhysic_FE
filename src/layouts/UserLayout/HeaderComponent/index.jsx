@@ -1,11 +1,47 @@
-import {Box, Button, Typography} from "@mui/material";
+import {Avatar, Box, Button, IconButton, Menu, MenuItem, Tooltip, Typography} from "@mui/material";
 import ShoppingCartIcon from '@mui/icons-material/ShoppingCart';
-import {useState} from "react";
+import React, {useEffect, useState} from "react";
 import {useNavigate} from "react-router-dom";
+import {jwtDecode} from "jwt-decode";
 
 function HeaderComponent(props) {
     const [totalItem, setTotalItem] = useState(10);
     const navigate = useNavigate();
+    const [isAuthenticated, setIsAuthenticated] = useState();
+
+    useEffect(() => {
+        const token = localStorage.getItem('authToken');
+
+        if (token) {
+            try {
+                const decodedToken = jwtDecode(token);
+                const currentTime = Date.now() / 1000;
+
+                if (decodedToken.exp > currentTime) {
+                    setIsAuthenticated(true);
+                } else {
+                    setIsAuthenticated(false);
+                    console.log("Token has expired");
+                }
+            } catch (error) {
+                console.error("Invalid token", error);
+                setIsAuthenticated(false);
+            }
+        }
+    }, []);
+    const [anchorElUser, setAnchorElUser] = React.useState(null);
+    const handleOpenUserMenu = (event) => {
+        setAnchorElUser(event.currentTarget);
+    };
+
+    const handleCloseUserMenu = () => {
+        setAnchorElUser(null);
+    };
+    const handleLogout = () => {
+        handleCloseUserMenu();
+        navigate('/logout');
+    };
+
     return (
         <>
             <div className="d-flex flex-column">
@@ -38,11 +74,41 @@ function HeaderComponent(props) {
                                 {totalItem}
                             </Typography>
                         </Box>
-                        <Button variant="contained" color="primary" onClick={() => {
-                            navigate("/login")
-                        }}>
-                            Đăng nhập
-                        </Button>
+
+                        {isAuthenticated ?
+                            <>
+                                <Tooltip title="Open settings">
+                                    <IconButton onClick={handleOpenUserMenu} sx={{p: 0}}>
+                                        <Avatar alt="User"
+                                                src="https://www.vietnamworks.com/hrinsider/wp-content/uploads/2023/12/anh-den-ngau.jpeg"/>
+                                    </IconButton>
+                                </Tooltip>
+
+                                <Menu
+                                    sx={{mt: '45px'}}
+                                    anchorEl={anchorElUser}
+                                    anchorOrigin={{
+                                        vertical: 'top',
+                                        horizontal: 'right',
+                                    }}
+                                    transformOrigin={{
+                                        vertical: 'top',
+                                        horizontal: 'right',
+                                    }}
+                                    open={Boolean(anchorElUser)}
+                                    onClose={handleCloseUserMenu}
+                                >
+                                    <MenuItem onClick={handleCloseUserMenu}>Quản lý thông tin</MenuItem>
+                                    <MenuItem onClick={handleLogout}>Đăng xuất</MenuItem>
+                                </Menu>
+                            </>
+                            :
+                            <Button variant="contained" color="primary" onClick={() => {
+                                navigate("/login")
+                            }}> "Đăng nhập"
+                            </Button>
+                        }
+
                     </div>
                 </div>
 
