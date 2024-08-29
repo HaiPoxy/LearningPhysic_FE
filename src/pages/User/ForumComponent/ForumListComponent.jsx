@@ -13,34 +13,12 @@ import {
 } from '@mui/material';
 import {Favorite, FavoriteBorder} from '@mui/icons-material';
 
-function ForumListComponent() {
+function ForumListComponent(props) {
     const [showReplyInput, setShowReplyInput] = useState({});
     const [showAllComments, setShowAllComments] = useState({});
     const [currentPage, setCurrentPage] = useState(1);
     const commentsPerPage = 2;
-
-    const [data, setData] = useState([
-        {
-            id: 1,
-            name: "Nông Văn Điền",
-            avatar: "NVĐ",
-            timestamp: "22 giờ trước",
-            content: "Một vật thể có khối lượng 5 kg được thả rơi tự do từ độ cao 10 mét. Hãy tính vận tốc của vật khi chạm đất. Biết rằng gia tốc trọng trường là 9,8 m/s².",
-            grade: 12,
-            comments: [
-                {
-                    name: "Nguyễn Văn A",
-                    comment: "Vận tốc khi chạm đất khoảng 14 m/s.",
-                    commentchilds: [
-                        {name: "Trần Thị B", comment: "Có thể tính bằng công thức v = √(2 * g * h)."},
-                        {name: "Lê Văn C", comment: "Câu hỏi này rất hay!"},
-                    ],
-                },
-                {name: "Trần Thị B", comment: "Có thể tính bằng công thức v = √(2 * g * h)."},
-                {name: "Lê Văn C", comment: "Câu hỏi này rất hay!"},
-            ],
-        },
-    ]);
+    const {type, data, setData} = props
     const [favoritePost, setFavoritePost] = useState([1, 2]);
     const handlePageChange = (event, value) => {
         setCurrentPage(value);
@@ -71,7 +49,10 @@ function ForumListComponent() {
             ...prevShowReplyInput,
             [commentIndex]: false,
         }));
-        handleShowAllComments(commentIndex);
+        setShowAllComments((prevShowAllComments) => ({
+            ...prevShowAllComments,
+            [commentIndex]: true,
+        }));
     };
 
     const handleShowAllComments = (commentIndex) => {
