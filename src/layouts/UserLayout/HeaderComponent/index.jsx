@@ -38,7 +38,9 @@ function HeaderComponent(props) {
                                 {totalItem}
                             </Typography>
                         </Box>
-                        <Button variant="contained" color="primary">
+                        <Button variant="contained" color="primary" onClick={() => {
+                            navigate("/login")
+                        }}>
                             Đăng nhập
                         </Button>
                     </div>
