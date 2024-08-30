@@ -1,15 +1,31 @@
-import React, {useState} from 'react';
+import React, {useEffect, useState} from 'react';
 import {Box, Button, Modal, TextField, Typography} from "@mui/material";
+import axios from "axios";
 
-function ChatDetailsModal({open, onClose, selectedQuestion, addReply}) {
+function ChatDetailsModal({open, onClose, selectedQuestion}) {
     const [newReply, setNewReply] = useState('');
 
     const handleAddReply = () => {
         if (newReply.trim() !== '') {
-            addReply(selectedQuestion.id, newReply);
+            axios.post("http://localhost:8081/api/v1/comments", {
+                    "content": newReply,
+                    "postId": selectedQuestion.id,
+                    "parentCommentId": selectedQuestion.parentCommentId != null ? selectedQuestion.parentCommentId : null,
+                    "childCommentIds": [],
+                    "status": "active",
+                    "accountId": 4
+                }
+            ).then((res) => {
+                console.log("res : + ", res)
+            })
+            // addReply(selectedQuestion.id, newReply);
             setNewReply('');
+            // onClose(); // Close the modal after adding a reply
         }
     };
+    useEffect(() => {
+        console.log("selectedQuestion: ", JSON.stringify(selectedQuestion))
+    }, [selectedQuestion]);
 
     return (
         <Modal
@@ -23,30 +39,30 @@ function ChatDetailsModal({open, onClose, selectedQuestion, addReply}) {
                 top: '50%',
                 left: '50%',
                 transform: 'translate(-50%, -50%)',
-                width: 600,  // Adjusted width
+                width: 600,
                 bgcolor: 'background.paper',
                 borderRadius: '10px',
                 boxShadow: 24,
                 p: 4,
                 outline: 'none',
-                overflowY: 'auto', // Handle overflow content
+                overflowY: 'auto',
             }}>
-                {selectedQuestion && (
+                {selectedQuestion ? (
                     <>
                         <Typography id="modal-title" variant="h6" component="h2" sx={{mb: 2, fontWeight: 'bold'}}>
                             {selectedQuestion.question}
                         </Typography>
                         <Typography variant="body2" sx={{mb: 2}}>
-                            <strong>Người hỏi:</strong> {selectedQuestion.asker}
+                            <strong>Người hỏi:</strong> {selectedQuestion.fullName}
                         </Typography>
                         <Typography variant="body2" sx={{mb: 2}}>
                             <strong>Email:</strong> {selectedQuestion.email}
                         </Typography>
                         <Typography variant="body2" sx={{mb: 2}}>
-                            <strong>Thời gian hỏi:</strong> {selectedQuestion.askedAt}
+                            <strong>Thời gian hỏi:</strong> {selectedQuestion.createdAt}
                         </Typography>
                         <Typography variant="body2" sx={{mb: 2}}>
-                            <strong>Lớp:</strong> {selectedQuestion.class}
+                            <strong>Lớp:</strong> {selectedQuestion.grade}
                         </Typography>
                         <Typography variant="body2" sx={{mb: 2}}>
                             <strong>Trạng thái:</strong> {selectedQuestion.status}
@@ -54,14 +70,17 @@ function ChatDetailsModal({open, onClose, selectedQuestion, addReply}) {
                         <Typography variant="body2" sx={{mb: 3}}>
                             <strong>Các bình luận:</strong>
                         </Typography>
-                        {selectedQuestion.answer.map((comment, index) => (
+                        {selectedQuestion.comments.map((comment, index) => (
                             <Box key={index} sx={{mb: 2, pl: 2, borderLeft: '2px solid #ddd'}}>
                                 <Typography variant="body2">
-                                    <strong>{comment.name}:</strong> {comment.comment}
+                                    <strong>{comment.fullName}:</strong> {comment.content}
                                 </Typography>
-                                {comment.commentchilds && comment.commentchilds.map((child, childIndex) => (
+                                <Box>
+                                    <Typography>Hiện</Typography> <Typography>Trả lời</Typography>
+                                </Box>
+                                {comment.childComments && comment.childComments.map((child, childIndex) => (
                                     <Typography key={childIndex} variant="body2" sx={{ml: 2, mt: 1}}>
-                                        <strong>{child.name}:</strong> {child.comment}
+                                        <strong>{child.fullName}:</strong> {child.content}
                                     </Typography>
                                 ))}
                             </Box>
@@ -78,13 +97,29 @@ function ChatDetailsModal({open, onClose, selectedQuestion, addReply}) {
                             onChange={(e) => setNewReply(e.target.value)}
                             sx={{mt: 2}}
                         />
-                        <Button variant="contained" color="primary" onClick={handleAddReply} sx={{mt: 2}}>
-                            Trả lời
-                        </Button>
-                        <Button variant="contained" color="secondary" onClick={onClose} sx={{mt: 2, ml: 2}}>
-                            Đóng
-                        </Button>
+                        <Box sx={{mt: 2}}>
+                            <Button
+                                variant="contained"
+                                color="primary"
+                                onClick={handleAddReply}
+                                disabled={newReply.trim() === ''}
+                            >
+                                Trả lời
+                            </Button>
+                            <Button
+                                variant="contained"
+                                color="secondary"
+                                onClick={onClose}
+                                sx={{ml: 2}}
+                            >
+                                Đóng
+                            </Button>
+                        </Box>
                     </>
+                ) : (
+                    <Typography variant="h6" component="h2">
+                        No question selected.
+                    </Typography>
                 )}
             </Box>
         </Modal>
