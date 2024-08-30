@@ -12,14 +12,15 @@ import {
     Typography,
 } from '@mui/material';
 import {Favorite, FavoriteBorder} from '@mui/icons-material';
+import axios from "axios";
 
-function ForumListComponent(props) {
+function ForumListComponent({type, data, setData}) {
     const [showReplyInput, setShowReplyInput] = useState({});
     const [showAllComments, setShowAllComments] = useState({});
     const [currentPage, setCurrentPage] = useState(1);
     const commentsPerPage = 2;
-    const {type, data, setData} = props
     const [favoritePost, setFavoritePost] = useState([1, 2]);
+
     const handlePageChange = (event, value) => {
         setCurrentPage(value);
     };
@@ -31,19 +32,26 @@ function ForumListComponent(props) {
         }));
     };
 
-    const handleReplySubmit = (commentIndex, value) => {
+    const handleReplySubmit = (postIndex, commentIndex, value) => {
         if (!value.trim()) return;
+        axios.post("http://localhost:8081/api/v1/comments", {
+            content: value,
+            postId: data[postIndex].id,
+            parentCommentId: data[postIndex].comments[commentIndex].id,
+            childCommentIds: [],
+            status: "active",
+            accountId: 4
+        }).then((res) => {
+            // Create a new data array with the updated comments
+            const newData = [...data];
+            newData[postIndex].comments[commentIndex].childComments.push({
+                fullName: "You", // Replace with the actual user name
+                content: value,
+            });
 
-        // Create a new data array with the updated comments
-        const newData = [...data];
-        newData[0].comments[commentIndex].commentchilds.push({
-            name: "You", // Replace with the actual user name
-            comment: value,
-        });
-
-        // Update the state with the modified data
-        setData(newData);
-
+            // Update the state with the modified data
+            setData(newData);
+        })
         // Hide the reply input field
         setShowReplyInput((prevShowReplyInput) => ({
             ...prevShowReplyInput,
@@ -61,20 +69,24 @@ function ForumListComponent(props) {
             [commentIndex]: !prevShowAllComments[commentIndex],
         }));
     };
+
     const handleAddFavorite = (postId) => {
-        console.log('handleAddFavorite' + postId)
         setFavoritePost((prevFavorites) => [...prevFavorites, postId]);
     };
 
     const handleRemoveFavorite = (postId) => {
-        console.log('handleRemoveFavorite' + postId)
         setFavoritePost((prevFavorites) =>
             prevFavorites.filter((id) => id !== postId)
         );
     };
+
+    // Calculate paginated data
+    const startIndex = (currentPage - 1) * commentsPerPage;
+    const paginatedData = data.slice(startIndex, startIndex + commentsPerPage);
+
     return (
         <>
-            {data.map((item, index) => (
+            {paginatedData.map((item, postIndex) => (
                 <Card
                     key={item.id}
                     sx={{
@@ -89,10 +101,9 @@ function ForumListComponent(props) {
                 >
                     <CardContent sx={{textAlign: 'left'}}>
                         <Box display="flex" alignItems="center">
-                            <Avatar sx={{bgcolor: 'red', mr: 2}}>{item.avatar}</Avatar>
+                            <Avatar sx={{bgcolor: 'red', mr: 2}}>{item.avatar || item.fullName[0]}</Avatar>
                             <Box>
-                                <Typography variant="h6">{item.name}
-                                </Typography>
+                                <Typography variant="h6">{item.fullName}</Typography>
                                 <Box sx={{display: 'flex', alignItems: 'center'}}>
                                     <Typography
                                         variant="caption"
@@ -109,7 +120,7 @@ function ForumListComponent(props) {
                                         color="text.secondary"
                                         sx={{marginLeft: 0.5}}
                                     >
-                                        {item.timestamp}
+                                        {new Date(item.createdAt).toLocaleString()}
                                     </Typography>
                                 </Box>
                             </Box>
@@ -127,7 +138,6 @@ function ForumListComponent(props) {
                                     <FavoriteBorder fontSize="normal" onClick={() => handleAddFavorite(item.id)}/>
                                 )}
                             </IconButton>
-
                         </Box>
                         <Typography sx={{mt: 1.5}}>{item.content}</Typography>
                         <Divider
@@ -138,44 +148,47 @@ function ForumListComponent(props) {
                             }}
                         />
                         <Box sx={{mb: 3}}>
-                            {item.comments.map((user, i) => (
-                                <Box key={i} sx={{mb: 1}}>
+                            {item.comments.map((user, commentIndex) => (
+                                <Box key={commentIndex} sx={{mb: 1}}>
                                     <Typography variant="body2">
-                                        <strong>{user.name}:</strong> {user.comment}
+                                        <strong>{user.fullName}:</strong> {user.content}
                                     </Typography>
-                                    {showAllComments[i] ? (
+                                    {showAllComments[commentIndex] ? (
                                         <>
-                                            {
-                                                user.commentchilds?.map((child, j) => (
-                                                    <Typography
-                                                        key={j}
-                                                        variant="body2"
-                                                        sx={{mt: 1, ml: 4}}
-                                                    >
-                                                        <strong>{child.name}:</strong> {child.comment}
-                                                    </Typography>
-                                                ))}
+                                            {user.childComments?.map((child, childIndex) => (
+                                                <Typography
+                                                    key={childIndex}
+                                                    variant="body2"
+                                                    sx={{mt: 1, ml: 4}}
+                                                >
+                                                    <strong>{child.fullName}:</strong> {child.content}
+                                                </Typography>
+                                            ))}
                                             <Button
                                                 size="small"
-                                                onClick={() => handleShowAllComments(i)}
+                                                onClick={() => handleShowAllComments(commentIndex)}
                                                 sx={{fontSize: '0.65rem'}}
                                             >
                                                 Ẩn
                                             </Button>
-
                                         </>
                                     ) : (
-                                        <Button size="small" onClick={() => handleShowAllComments(i)}
-                                                sx={{fontSize: '0.65rem'}}>
+                                        <Button
+                                            size="small"
+                                            onClick={() => handleShowAllComments(commentIndex)}
+                                            sx={{fontSize: '0.65rem'}}
+                                        >
                                             Xem thêm
                                         </Button>
                                     )}
-                                    <Button size="small"
-                                            onClick={() => handleReplyClick(i)}
-                                            sx={{fontSize: '0.65rem'}}>
+                                    <Button
+                                        size="small"
+                                        onClick={() => handleReplyClick(commentIndex)}
+                                        sx={{fontSize: '0.65rem'}}
+                                    >
                                         Trả lời
                                     </Button>
-                                    {showReplyInput[i] && (
+                                    {showReplyInput[commentIndex] && (
                                         <Box sx={{mt: 1}}>
                                             <TextField
                                                 fullWidth
@@ -184,7 +197,7 @@ function ForumListComponent(props) {
                                                 sx={{mr: 2}}
                                                 onKeyDown={(e) => {
                                                     if (e.key === 'Enter') {
-                                                        handleReplySubmit(i, e.target.value);
+                                                        handleReplySubmit(postIndex, commentIndex, e.target.value);
                                                         e.target.value = '';
                                                     }
                                                 }}
