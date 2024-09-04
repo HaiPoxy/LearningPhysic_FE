@@ -1,4 +1,4 @@
-import React, {useEffect, useState} from 'react';
+import React, {useState} from 'react';
 import {Box, Button, IconButton, Modal, Paper, TextField, Typography} from "@mui/material";
 import {styled} from '@mui/system';
 import axios from "axios";
@@ -74,7 +74,7 @@ function ChatDetailsModal({open, onClose, selectedQuestion}) {
                 "status": "active",
                 "accountId": 1
             }).then((res) => {
-                console.log("res:", res);
+                // console.log("res:", res);
 
                 if (commentId) {
                     // Clear reply field after successful submission
@@ -112,9 +112,9 @@ function ChatDetailsModal({open, onClose, selectedQuestion}) {
         setNewComment(value);
     };
 
-    useEffect(() => {
-        console.log("selectedQuestion: ", JSON.stringify(selectedQuestion));
-    }, [selectedQuestion]);
+    // useEffect(() => {
+    //     // console.log("selectedQuestion: ", JSON.stringify(selectedQuestion));
+    // }, [selectedQuestion]);
 
     return (
         <Modal
