@@ -1,7 +1,60 @@
 import React, {useEffect, useState} from 'react';
-import {Box, Button, Modal, TextField, Typography} from "@mui/material";
+import {Box, Button, IconButton, Modal, Paper, TextField, Typography} from "@mui/material";
+import {styled} from '@mui/system';
 import axios from "axios";
 import CloseIcon from '@mui/icons-material/Close';
+import SendIcon from '@mui/icons-material/Send';
+import ChatBubbleOutlineIcon from '@mui/icons-material/ChatBubbleOutline';
+import ArrowDropDownIcon from '@mui/icons-material/ArrowDropDown';
+import ArrowDropUpIcon from '@mui/icons-material/ArrowDropUp';
+
+// Styled components for better UI
+const StyledModalBox = styled(Box)({
+    position: 'absolute',
+    top: '50%',
+    left: '50%',
+    transform: 'translate(-50%, -50%)',
+    width: '600px',
+    backgroundColor: '#fff',  // You can replace '#fff' with any color you prefer
+    borderRadius: '10px',
+    boxShadow: 24,
+    padding: '24px',
+    outline: 'none',
+    overflowY: 'auto',
+    maxHeight: '80vh',
+});
+
+const StyledCommentBox = styled(Paper)({
+    padding: '16px',
+    marginBottom: '16px',
+    borderLeft: '4px solid #1976d2',
+    backgroundColor: '#f5f5f5',  // A neutral background color for the comment box
+});
+
+const ChildCommentBox = styled(Box)({
+    marginLeft: '16px',
+    paddingLeft: '16px',
+    borderLeft: '2px solid #ddd',
+});
+
+const ActionButtonBox = styled(Box)({
+    display: 'flex',
+    justifyContent: 'space-between',
+    alignItems: 'center',
+    marginTop: '8px',
+});
+
+const StyledButton = styled(Button)({
+    textTransform: 'none',
+    borderRadius: '20px',
+});
+
+const ReplyTextField = styled(TextField)({
+    marginTop: '12px',
+    '& .MuiOutlinedInput-root': {
+        borderRadius: '12px',
+    },
+});
 
 function ChatDetailsModal({open, onClose, selectedQuestion}) {
     const [newReplies, setNewReplies] = useState({});
@@ -19,7 +72,7 @@ function ChatDetailsModal({open, onClose, selectedQuestion}) {
                 "parentCommentId": commentId,
                 "childCommentIds": [],
                 "status": "active",
-                "accountId": 4
+                "accountId": 1
             }).then((res) => {
                 console.log("res:", res);
 
@@ -70,41 +123,30 @@ function ChatDetailsModal({open, onClose, selectedQuestion}) {
             aria-labelledby="modal-title"
             aria-describedby="modal-description"
         >
-            <Box sx={{
-                position: 'absolute',
-                top: '50%',
-                left: '50%',
-                transform: 'translate(-50%, -50%)',
-                width: 600,
-                bgcolor: 'background.paper',
-                borderRadius: '10px',
-                boxShadow: 24,
-                p: 3,
-                outline: 'none',
-                overflowY: 'auto',
-            }}>
+            <StyledModalBox>
                 <Box
                     sx={{
                         display: 'flex',
                         justifyContent: 'flex-end',
-                        alignItems: 'top',
                     }}
                 >
-                    <Button
-                        variant="link"
-                        onClick={onClose}
-                        sx={{mt: 2}}
-                        startIcon={<CloseIcon/>}
-                    >
-                    </Button>
+                    <IconButton onClick={onClose}>
+                        <CloseIcon/>
+                    </IconButton>
                 </Box>
                 {selectedQuestion ? (
                     <>
-                        <Typography id="modal-title" variant="h6" component="h2" sx={{mb: 2, fontWeight: 'bold'}}>
+                        <Typography id="modal-title" variant="h6" sx={{fontWeight: 'bold', mb: 2}}>
                             {selectedQuestion.question}
                         </Typography>
                         <Typography variant="body2" sx={{mb: 2}}>
-                            <strong>Người hỏi:</strong> {selectedQuestion.fullName}
+                            <strong>Người hỏi: </strong> {selectedQuestion.fullName}
+                        </Typography>
+                        <Typography variant="body2" sx={{mb: 2}}>
+                            <strong>Nội dung: </strong>{selectedQuestion.content}
+                        </Typography>
+                        <Typography variant="body2" sx={{mb: 2}}>
+                            <strong>Thời gian hỏi: </strong>{selectedQuestion.createdAt}
                         </Typography>
                         <Typography variant="body2" sx={{mb: 3}}>
                             <strong>Các bình luận:</strong>
@@ -113,30 +155,39 @@ function ChatDetailsModal({open, onClose, selectedQuestion}) {
                             selectedQuestion.comments
                                 .filter(comment => !comment.parentCommentId)
                                 .map((comment, index) => (
-                                    <Box key={index} sx={{mb: 2, pl: 2, borderLeft: '2px solid #ddd'}}>
+                                    <StyledCommentBox key={index}>
                                         <Typography variant="body2">
                                             <strong>{comment.fullName}:</strong> {comment.content}
                                         </Typography>
 
                                         {/* Toggle Show Child Comments */}
-                                        <Box>
-                                            <Button onClick={() => toggleShowChildComments(comment.id)}>
-                                                {showChildComments[comment.id] ? 'Ẩn' : 'Hiện'}
-                                            </Button>
-                                            <Button onClick={() => toggleReplyInput(comment.id)}>Trả lời</Button>
-                                        </Box>
+                                        <ActionButtonBox>
+                                            <StyledButton
+                                                variant="text"
+                                                onClick={() => toggleShowChildComments(comment.id)}
+                                                startIcon={showChildComments[comment.id] ? <ArrowDropUpIcon/> :
+                                                    <ArrowDropDownIcon/>}>
+                                                {showChildComments[comment.id] ? 'Ẩn' : 'Hiện'} câu trả lời
+                                            </StyledButton>
+                                            <StyledButton variant="text" onClick={() => toggleReplyInput(comment.id)}
+                                                          startIcon={<ChatBubbleOutlineIcon/>}>
+                                                Trả lời
+                                            </StyledButton>
+                                        </ActionButtonBox>
 
                                         {/* Show Child Comments if toggled */}
                                         {showChildComments[comment.id] && comment.childComments?.map((child, childIndex) => (
-                                            <Typography key={childIndex} variant="body2" sx={{ml: 2, mt: 1}}>
-                                                <strong>{child.fullName}:</strong> {child.content}
-                                            </Typography>
+                                            <ChildCommentBox key={childIndex}>
+                                                <Typography variant="body2">
+                                                    <strong>{child.fullName}:</strong> {child.content}
+                                                </Typography>
+                                            </ChildCommentBox>
                                         ))}
 
                                         {/* Show reply input if toggled */}
                                         {showReplyInput[comment.id] && (
                                             <>
-                                                <TextField
+                                                <ReplyTextField
                                                     label="Nhập câu trả lời mới"
                                                     fullWidth
                                                     variant="outlined"
@@ -144,27 +195,26 @@ function ChatDetailsModal({open, onClose, selectedQuestion}) {
                                                     rows={2}
                                                     value={newReplies[comment.id] || ''}
                                                     onChange={(e) => handleNewReplyChange(comment.id, e.target.value)}
-                                                    sx={{mt: 2}}
                                                 />
                                                 <Button
                                                     variant="contained"
                                                     color="primary"
                                                     onClick={() => handleAddReply(comment.id)}
+                                                    endIcon={<SendIcon/>}
                                                     sx={{mt: 1}}
                                                 >
-                                                    Trả lời
+                                                    Gửi
                                                 </Button>
                                             </>
-
                                         )}
-                                    </Box>
+                                    </StyledCommentBox>
                                 ))
                         ) : (
                             <Typography variant="body2">Chưa có bình luận nào.</Typography>
                         )}
 
                         {/* New comment input */}
-                        <TextField
+                        <ReplyTextField
                             label="Nhập bình luận mới"
                             fullWidth
                             variant="outlined"
@@ -172,23 +222,23 @@ function ChatDetailsModal({open, onClose, selectedQuestion}) {
                             rows={2}
                             value={newComment}
                             onChange={(e) => handleNewCommentChange(e.target.value)}
-                            sx={{mt: 2}}
                         />
                         <Button
                             variant="contained"
                             color="primary"
                             onClick={() => handleAddReply(null)}  // Pass null for a new top-level comment
-                            sx={{mt: 1}}
+                            endIcon={<SendIcon/>}
+                            sx={{mt: 2}}
                         >
                             Bình luận
                         </Button>
                     </>
                 ) : (
                     <Typography variant="h6" component="h2">
-                        No question selected.
+                        Không có câu hỏi được chọn.
                     </Typography>
                 )}
-            </Box>
+            </StyledModalBox>
         </Modal>
     );
 }
