@@ -5,13 +5,14 @@ import CloseIcon from '@mui/icons-material/Close';
 
 function ChatDetailsModal({open, onClose, selectedQuestion}) {
     const [newReplies, setNewReplies] = useState({});
+    const [newComment, setNewComment] = useState(''); // Independent state for a new comment
     const [showChildComments, setShowChildComments] = useState({});
     const [showReplyInput, setShowReplyInput] = useState({});
 
     const handleAddReply = (commentId) => {
-        const replyContent = newReplies[commentId];
+        const replyContent = commentId ? newReplies[commentId] : newComment;
 
-        if (replyContent.trim() !== '' && selectedQuestion.id != null) {
+        if (replyContent && replyContent.trim() !== '' && selectedQuestion.id != null) {
             axios.post("http://localhost:8081/api/v1/comments", {
                 "content": replyContent,
                 "postId": selectedQuestion.id,
@@ -20,9 +21,15 @@ function ChatDetailsModal({open, onClose, selectedQuestion}) {
                 "status": "active",
                 "accountId": 4
             }).then((res) => {
-                console.log("res: lan 1 ", res);
-                // Clear reply field after successful submission
-                setNewReplies(prev => ({...prev, [commentId]: ''}));
+                console.log("res:", res);
+
+                if (commentId) {
+                    // Clear reply field after successful submission
+                    setNewReplies(prev => ({...prev, [commentId]: ''}));
+                } else {
+                    // Clear new comment field after submission
+                    setNewComment('');
+                }
             });
         }
     };
@@ -46,6 +53,10 @@ function ChatDetailsModal({open, onClose, selectedQuestion}) {
             ...prevState,
             [commentId]: value,
         }));
+    };
+
+    const handleNewCommentChange = (value) => {
+        setNewComment(value);
     };
 
     useEffect(() => {
@@ -151,6 +162,26 @@ function ChatDetailsModal({open, onClose, selectedQuestion}) {
                         ) : (
                             <Typography variant="body2">Chưa có bình luận nào.</Typography>
                         )}
+
+                        {/* New comment input */}
+                        <TextField
+                            label="Nhập bình luận mới"
+                            fullWidth
+                            variant="outlined"
+                            multiline
+                            rows={2}
+                            value={newComment}
+                            onChange={(e) => handleNewCommentChange(e.target.value)}
+                            sx={{mt: 2}}
+                        />
+                        <Button
+                            variant="contained"
+                            color="primary"
+                            onClick={() => handleAddReply(null)}  // Pass null for a new top-level comment
+                            sx={{mt: 1}}
+                        >
+                            Bình luận
+                        </Button>
                     </>
                 ) : (
                     <Typography variant="h6" component="h2">
