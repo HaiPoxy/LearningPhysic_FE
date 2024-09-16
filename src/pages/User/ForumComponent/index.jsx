@@ -14,12 +14,11 @@ import {
 } from '@mui/material';
 import SearchBarComponent from "./SearchBarComponent.jsx";
 import ForumListComponent from "./ForumListComponent.jsx";
-import SidebarForumComponent from "./SidebarForumComponent.jsx";
 import axios from "axios";
 
 function ForumComponent() {
     const [typePost, setTypePost] = useState(0);
-    const [grade, setGrade] = useState('');
+    const [grade, setGrade] = useState(0);
     const [search, setSearch] = useState('');
     const [question, setQuestion] = useState({
         content: "",
@@ -32,11 +31,13 @@ function ForumComponent() {
 
     // Fetch data from the API
     const fetchData = useCallback(() => {
+        console.log("Grade ", grade)
         axios.get(`http://localhost:8081/api/v1/posts`, {
             params: {
                 page: page - 1,
                 size: pageSize,
-                type: typePost
+                type: typePost,
+                grade: grade,
             }
         })
             .then(response => {
@@ -48,7 +49,7 @@ function ForumComponent() {
                 console.error("There was an error fetching the data!", error);
                 setData([]); // Reset data if there's an error
             });
-    }, [page, pageSize, typePost]);
+    }, [page, pageSize, typePost, grade]);
 
     // Call fetchData whenever the page or page size changes
     useEffect(() => {
@@ -146,7 +147,38 @@ function ForumComponent() {
 
             <Grid container spacing={2} mt={3}>
                 {/* Sidebar */}
-                <SidebarForumComponent onClick={(v) => setGrade(v)}/>
+                <Grid item xs={12} md={2}>
+                    <List
+                        sx={{
+                            width: '100%',
+                            bgcolor: 'background.paper',
+                            borderRadius: '8px',
+                            boxShadow: 3,
+                            p: 1,
+                        }}
+                    >
+                        {['Lớp 6', 'Lớp 7', 'Lớp 8', 'Lớp 9', 'Lớp 10', 'Lớp 11', 'Lớp 12', 'ĐH - CĐ'].map(
+                            (text, index) => (
+                                <ListItem
+                                    button
+                                    key={index}
+                                    sx={{
+                                        borderRadius: '4px',
+                                        mb: 1,
+                                        '&:hover': {bgcolor: 'primary.light'},
+                                    }}
+                                    onClick={() => setGrade(index + 6)}
+                                >
+                                    <ListItemText
+                                        primary={text}
+                                        primaryTypographyProps={{fontWeight: 'bold', fontSize: '1rem'}}
+
+                                    />
+                                </ListItem>
+                            )
+                        )}
+                    </List>
+                </Grid>
 
                 {/* Main Content */}
                 <Grid item xs={12} md={7}>
