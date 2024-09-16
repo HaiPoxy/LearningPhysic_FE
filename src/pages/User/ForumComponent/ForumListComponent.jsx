@@ -14,10 +14,10 @@ import {
 import {Favorite, FavoriteBorder} from '@mui/icons-material';
 import axios from "axios";
 
-function ForumListComponent({type, data, setData}) {
+function ForumListComponent({type, data, setData, page}) {
     const [showReplyInput, setShowReplyInput] = useState({});
     const [showAllComments, setShowAllComments] = useState({});
-    const [currentPage, setCurrentPage] = useState(1);
+    const [currentPage, setCurrentPage] = useState(page);
     const commentsPerPage = 2;
     const [favoritePost, setFavoritePost] = useState([1, 2]);
 
@@ -101,9 +101,13 @@ function ForumListComponent({type, data, setData}) {
                 >
                     <CardContent sx={{textAlign: 'left'}}>
                         <Box display="flex" alignItems="center">
-                            <Avatar sx={{bgcolor: 'red', mr: 2}}>{item.avatar || item.fullName[0]}</Avatar>
+                            {/*<Avatar sx={{bgcolor: 'red', mr: 2}}>{item.avatar || item.fullName[0]}</Avatar>*/}
+                            <Avatar sx={{bgcolor: 'red', mr: 2}}>
+                                {item.avatar ? item.avatar : (item.fullName ? item.fullName[0] : 'Ẩn danh')}
+                            </Avatar>
+
                             <Box>
-                                <Typography variant="h6">{item.fullName}</Typography>
+                                <Typography variant="h6">{item.fullName ? item.fullName : 'Ẩn danh'}</Typography>
                                 <Box sx={{display: 'flex', alignItems: 'center'}}>
                                     <Typography
                                         variant="caption"
@@ -151,7 +155,7 @@ function ForumListComponent({type, data, setData}) {
                             {item.comments.map((user, commentIndex) => (
                                 <Box key={commentIndex} sx={{mb: 1}}>
                                     <Typography variant="body2">
-                                        <strong>{user.fullName}:</strong> {user.content}
+                                        <strong>{user.fullName ? user.fullName : "Ẩn danh"}:</strong> {user.content}
                                     </Typography>
                                     {showAllComments[commentIndex] ? (
                                         <>

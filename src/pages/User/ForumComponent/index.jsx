@@ -1,4 +1,4 @@
-import React, {useEffect, useState} from 'react';
+import React, {useCallback, useEffect, useState} from 'react';
 import {
     Badge,
     Box,
@@ -15,317 +15,49 @@ import {
 import SearchBarComponent from "./SearchBarComponent.jsx";
 import ForumListComponent from "./ForumListComponent.jsx";
 import SidebarForumComponent from "./SidebarForumComponent.jsx";
+import axios from "axios";
 
 function ForumComponent() {
-    const [typePost, setTypePost] = useState('Tất cả')
-    const [grade, setGrade] = useState('')
-    const [search, setSearch] = useState('')
+    const [typePost, setTypePost] = useState(0);
+    const [grade, setGrade] = useState('');
+    const [search, setSearch] = useState('');
     const [question, setQuestion] = useState({
         content: "",
         grade: ""
-    })
-    const [data, setData] = useState([
-        {
-            "id": 4,
-            "title": "Understanding JSON in Java",
-            "content": "This post explains how to work with JSON in Java.",
-            "numberLike": 100,
-            "grade": 0,
-            "status": "ACTIVE",
-            "accountId": 1,
-            "email": "nam@gmail.com",
-            "fullName": "nam",
-            "avatarLink": "https://img.tripi.vn/cdn-cgi/image/width=700",
-            "createdAt": "2024-08-30T05:44:20.429262",
-            "updatedAt": "2024-08-30T05:44:20.429292",
-            "comments": [
-                {
-                    "id": 33,
-                    "content": "This is a sample comment.",
-                    "postId": 4,
-                    "accountId": 4,
-                    "fullName": "nam",
-                    "parentCommentId": null,
-                    "childComments": [],
-                    "createdAt": "2024-08-30T17:24:23.804314",
-                    "updatedAt": "2024-08-30T17:24:23.804332",
-                    "status": "active"
-                },
-                {
-                    "id": 34,
-                    "content": "This is a sample comment.",
-                    "postId": 4,
-                    "accountId": 6,
-                    "fullName": "nam",
-                    "parentCommentId": null,
-                    "childComments": [],
-                    "createdAt": "2024-08-30T17:24:25.259292",
-                    "updatedAt": "2024-08-30T17:24:25.259307",
-                    "status": "active"
-                },
-                {
-                    "id": 35,
-                    "content": "This is a sample comment.",
-                    "postId": 4,
-                    "accountId": 7,
-                    "fullName": "nam",
-                    "parentCommentId": null,
-                    "childComments": [],
-                    "createdAt": "2024-08-30T17:24:25.903494",
-                    "updatedAt": "2024-08-30T17:24:25.903507",
-                    "status": "active"
-                },
-                {
-                    "id": 36,
-                    "content": "This is a sample comment.",
-                    "postId": 4,
-                    "accountId": 4,
-                    "fullName": "nam",
-                    "parentCommentId": null,
-                    "childComments": [
-                        {
-                            "id": 48,
-                            "content": "This is a sample comment.",
-                            "postId": null,
-                            "accountId": 4,
-                            "fullName": "nam",
-                            "parentCommentId": 4,
-                            "childComments": [],
-                            "createdAt": "2024-08-30T17:26:08.521945",
-                            "updatedAt": "2024-08-30T17:26:08.521958",
-                            "status": "active"
-                        },
-                        {
-                            "id": 49,
-                            "content": "This is a sample comment.",
-                            "postId": null,
-                            "accountId": 6,
-                            "fullName": "nam",
-                            "parentCommentId": 4,
-                            "childComments": [],
-                            "createdAt": "2024-08-30T17:44:31.364124",
-                            "updatedAt": "2024-08-30T17:44:31.364206",
-                            "status": "active"
-                        },
-                        {
-                            "id": 50,
-                            "content": "This is a sample comment.",
-                            "postId": null,
-                            "accountId": 7,
-                            "fullName": "nam",
-                            "parentCommentId": 4,
-                            "childComments": [],
-                            "createdAt": "2024-08-30T17:44:31.452336",
-                            "updatedAt": "2024-08-30T17:44:31.452361",
-                            "status": "active"
-                        },
-                        {
-                            "id": 57,
-                            "content": "This is a sample comment.",
-                            "postId": null,
-                            "accountId": 4,
-                            "fullName": "nam",
-                            "parentCommentId": 4,
-                            "childComments": [],
-                            "createdAt": "2024-08-30T23:57:15.370242",
-                            "updatedAt": "2024-08-30T23:57:15.370331",
-                            "status": "active"
-                        },
-                        {
-                            "id": 58,
-                            "content": "This is a sample comment.",
-                            "postId": null,
-                            "accountId": 4,
-                            "fullName": "nam",
-                            "parentCommentId": 4,
-                            "childComments": [],
-                            "createdAt": "2024-08-30T23:57:15.462185",
-                            "updatedAt": "2024-08-30T23:57:15.462206",
-                            "status": "active"
-                        },
-                        {
-                            "id": 59,
-                            "content": "Hê lô hô.",
-                            "postId": null,
-                            "accountId": 4,
-                            "fullName": "nam",
-                            "parentCommentId": 4,
-                            "childComments": [],
-                            "createdAt": "2024-08-30T23:58:32.562893",
-                            "updatedAt": "2024-08-30T23:58:32.562911",
-                            "status": "active"
-                        },
-                        {
-                            "id": 60,
-                            "content": "Hê lô hô.",
-                            "postId": null,
-                            "accountId": 4,
-                            "fullName": "nam",
-                            "parentCommentId": 4,
-                            "childComments": [],
-                            "createdAt": "2024-08-30T23:58:32.57146",
-                            "updatedAt": "2024-08-30T23:58:32.571479",
-                            "status": "active"
-                        }
-                    ],
-                    "createdAt": "2024-08-30T17:24:26.567544",
-                    "updatedAt": "2024-08-30T17:24:26.567555",
-                    "status": "active"
-                },
-                {
-                    "id": 48,
-                    "content": "This is a sample comment.",
-                    "postId": 4,
-                    "accountId": 4,
-                    "fullName": "nam",
-                    "parentCommentId": null,
-                    "childComments": [],
-                    "createdAt": "2024-08-30T17:26:08.521945",
-                    "updatedAt": "2024-08-30T17:26:08.521958",
-                    "status": "active"
-                },
-                {
-                    "id": 50,
-                    "content": "This is a sample comment.",
-                    "postId": 4,
-                    "accountId": 7,
-                    "fullName": "nam",
-                    "parentCommentId": null,
-                    "childComments": [],
-                    "createdAt": "2024-08-30T17:44:31.452336",
-                    "updatedAt": "2024-08-30T17:44:31.452361",
-                    "status": "active"
-                },
-                {
-                    "id": 58,
-                    "content": "This is a sample comment.",
-                    "postId": 4,
-                    "accountId": 4,
-                    "fullName": "nam",
-                    "parentCommentId": null,
-                    "childComments": [],
-                    "createdAt": "2024-08-30T23:57:15.462185",
-                    "updatedAt": "2024-08-30T23:57:15.462206",
-                    "status": "active"
-                },
-                {
-                    "id": 60,
-                    "content": "Hê lô hô.",
-                    "postId": 4,
-                    "accountId": 4,
-                    "fullName": "nam",
-                    "parentCommentId": null,
-                    "childComments": [],
-                    "createdAt": "2024-08-30T23:58:32.57146",
-                    "updatedAt": "2024-08-30T23:58:32.571479",
-                    "status": "active"
-                },
-                {
-                    "id": 64,
-                    "content": "h",
-                    "postId": 4,
-                    "accountId": 4,
-                    "fullName": "nam",
-                    "parentCommentId": null,
-                    "childComments": [],
-                    "createdAt": "2024-08-31T02:32:21.989617",
-                    "updatedAt": "2024-08-31T02:32:21.989777",
-                    "status": "active"
-                },
-                {
-                    "id": 65,
-                    "content": "he",
-                    "postId": 4,
-                    "accountId": 4,
-                    "fullName": "nam",
-                    "parentCommentId": null,
-                    "childComments": [],
-                    "createdAt": "2024-08-31T02:32:27.650745",
-                    "updatedAt": "2024-08-31T02:32:27.650765",
-                    "status": "active"
-                }
-            ]
-        },
-        {
-            "id": 1,
-            "title": "Understanding JSON in Java",
-            "content": "This post explains how to work with JSON in Java.",
-            "numberLike": 100,
-            "grade": 0,
-            "status": "ACTIVE",
-            "accountId": 1,
-            "email": "nam@gmail.com",
-            "fullName": "nam",
-            "avatarLink": "https://img.tripi.vn/cdn-cgi/image/width=700",
-            "createdAt": "2024-08-30T05:43:59.832052",
-            "updatedAt": "2024-08-30T05:43:59.834096",
-            "comments": []
-        },
-        {
-            "id": 3,
-            "title": "Understanding JSON in Java",
-            "content": "This post explains how to work with JSON in Java.",
-            "numberLike": 100,
-            "grade": 0,
-            "status": "ACTIVE",
-            "accountId": 1,
-            "email": "nam@gmail.com",
-            "fullName": "nam",
-            "avatarLink": "https://img.tripi.vn/cdn-cgi/image/width=700",
-            "createdAt": "2024-08-30T05:20:08.820115",
-            "updatedAt": "2024-08-30T05:20:08.820171",
-            "comments": []
-        },
-        {
-            "id": 2,
-            "title": "Understanding JSON in Java",
-            "content": "This post explains how to work with JSON in Java.",
-            "numberLike": 100,
-            "grade": 0,
-            "status": "ACTIVE",
-            "accountId": 1,
-            "email": "nam@gmail.com",
-            "fullName": "nam",
-            "avatarLink": "https://img.tripi.vn/cdn-cgi/image/width=700",
-            "createdAt": "2024-08-30T05:18:56.195692",
-            "updatedAt": "2024-08-30T05:18:56.195748",
-            "comments": [
-                {
-                    "id": 62,
-                    "content": "helo",
-                    "postId": 2,
-                    "accountId": 4,
-                    "fullName": "nam",
-                    "parentCommentId": null,
-                    "childComments": [],
-                    "createdAt": "2024-08-31T00:01:41.213385",
-                    "updatedAt": "2024-08-31T00:01:41.214193",
-                    "status": "active"
-                },
-                {
-                    "id": 63,
-                    "content": "nhô",
-                    "postId": 2,
-                    "accountId": 4,
-                    "fullName": "nam",
-                    "parentCommentId": null,
-                    "childComments": [],
-                    "createdAt": "2024-08-31T00:12:21.800002",
-                    "updatedAt": "2024-08-31T00:12:21.800572",
-                    "status": "active"
-                }
-            ]
-        }
-    ]);
-    useEffect(() => {
-        console.log("typePost " + typePost)
-        console.log("grade " + grade)
-        console.log("search " + search)
-    }, [typePost, grade, search]);
+    });
+    const [data, setData] = useState([]);
+    const [page, setPage] = useState(1);
+    const [pageSize, setPageSize] = useState(10);
+    const [totalPages, setTotalPages] = useState(1);
 
-    const handleSerch = (value) => {
-        setSearch(value)
-    }
+    // Fetch data from the API
+    const fetchData = useCallback(() => {
+        axios.get(`http://localhost:8081/api/v1/posts`, {
+            params: {
+                page: page - 1,
+                size: pageSize,
+                type: typePost
+            }
+        })
+            .then(response => {
+                const {content, totalPages} = response.data; // Extract content and totalPages from API response
+                setData(content); // Set content to data state
+                setTotalPages(totalPages); // Set total pages
+            })
+            .catch(error => {
+                console.error("There was an error fetching the data!", error);
+                setData([]); // Reset data if there's an error
+            });
+    }, [page, pageSize, typePost]);
+
+    // Call fetchData whenever the page or page size changes
+    useEffect(() => {
+        fetchData();
+    }, [fetchData]);
+
+    const handleSearch = (value) => {
+        setSearch(value);
+    };
 
     const handleQuestionChange = (event) => {
         setQuestion({...question, content: event.target.value});
@@ -334,12 +66,18 @@ function ForumComponent() {
     const handleGradeChange = (event) => {
         setQuestion({...question, grade: event.target.value});
     };
+
     const handleSubmit = () => {
         console.log('Submitted question:', question);
     };
+
+    const handlePageChange = (event, value) => {
+        setPage(value - 1);
+    };
+
     return (
         <>
-            <SearchBarComponent onSubmit={handleSerch}/>
+            <SearchBarComponent onSubmit={handleSearch}/>
 
             {/* Header with Search and Buttons */}
             <Grid container spacing={2} mt={3}>
@@ -363,7 +101,6 @@ function ForumComponent() {
                             height: 'auto',
                             fontSize: '0.875rem',
                         }}
-
                     >
                         <MenuItem value="None" disabled>
                             Chọn lớp
@@ -396,9 +133,9 @@ function ForumComponent() {
             <Grid container mt={3} justifyContent="center">
                 <Grid item>
                     <Box display="flex" gap={1}>
-                        {['Tất cả', 'Câu hỏi hay', 'Chưa trả lời', 'Câu hỏi của bạn', 'Câu hỏi đã lưu'].map((text) => (
+                        {['Tất cả', 'Câu hỏi hay', 'Chưa trả lời', 'Câu hỏi của bạn', 'Câu hỏi đã lưu'].map((text, index) => (
                             <Button key={text} variant="outlined" color="primary" onClick={() => {
-                                setTypePost(text)
+                                setTypePost(index);
                             }}>
                                 {text}
                             </Button>
@@ -409,12 +146,20 @@ function ForumComponent() {
 
             <Grid container spacing={2} mt={3}>
                 {/* Sidebar */}
-                <SidebarForumComponent onclick={(v) => setGrade(v)}/>
+                <SidebarForumComponent onClick={(v) => setGrade(v)}/>
 
                 {/* Main Content */}
                 <Grid item xs={12} md={7}>
-                    <ForumListComponent type={typePost} data={data} setData={setData}/>
+                    <ForumListComponent
+                        type={typePost}
+                        data={data}
+                        setData={setData}
+                        page={page}
+                        totalPages={totalPages}
+                        handlePageChange={handlePageChange}
+                    />
                 </Grid>
+
                 {/* Ranking List */}
                 <Grid item xs={12} md={3}>
                     <List
@@ -447,7 +192,6 @@ function ForumComponent() {
                     </List>
                 </Grid>
             </Grid>
-
         </>
     );
 }
