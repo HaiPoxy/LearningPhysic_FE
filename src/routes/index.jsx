@@ -17,7 +17,13 @@ import {
     NotFoundComponent,
     QuestionsComponent,
     ResetPasswordComponent,
-    ShoppingCartComponent
+    ShoppingCartComponent,
+    Notification_ShowAll,
+    ChangePassword,
+    UpdateProfile,
+    AppSettings,
+    FavoriteCourse,
+    Favorite_Book
 } from '../pages';
 
 export const routeItems = [
@@ -84,6 +90,45 @@ export const routeItems = [
                 title: 'Shopping Cart Page',
                 component: ShoppingCartComponent,
                 path: '/shopping-cart'
+            },
+
+            {
+                name: 'Notification ShowAll',
+                title: 'Notification ShowAll Page',
+                component: Notification_ShowAll,
+                path: '/notification-showAll'
+            },
+
+            {
+                name: 'ChangePassword',
+                title: 'ChangePassword Page',
+                component: ChangePassword,
+                path: '/thông-tin-ca-nhân/thay-đổi-mật-khẩu'
+            },
+            {
+                name: 'UpdateProfile',
+                title: 'UpdateProfile Page',
+                component: UpdateProfile,
+                path: '/thông-tin-ca-nhân/cập-nhật-thông-tin'
+            },
+            {
+                name: 'AppSettings',
+                title: 'AppSettings Page',
+                component: AppSettings,
+                path: '/thông-tin-ca-nhân/cài-đặt'
+            },
+
+            {
+                name: 'FavoriteCourse',
+                title: 'FavoriteCourse Page',
+                component: FavoriteCourse,
+                path: '/favorite-course'
+            },
+            {
+                name: 'Favorite_Book',
+                title: 'Favorite_Book Page',
+                component: Favorite_Book,
+                path: '/favorite-book'
             }
         ]
     },

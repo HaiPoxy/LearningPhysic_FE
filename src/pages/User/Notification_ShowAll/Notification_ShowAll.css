@@ -1,0 +1,64 @@
+.notification-show {
+  width: 60%;
+
+  margin: 0 auto;
+  padding: 20px;
+  height: auto;
+
+}
+
+.notification-show h3 {
+  font-size: 24px;
+  color: #333;
+  margin-bottom: 20px;
+}
+
+.show-list {
+  /* display: grid;
+  grid-template-columns: repeat(auto-fill, minmax(200px, 1fr));
+  grid-gap: 20px; */
+  display: flex;
+  flex-direction: column;
+  gap: 10px;
+}
+
+.show-list-item {
+  border: 1px solid #ccc;
+  border-radius: 5px;
+  padding: 10px;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  gap: 10px;
+  cursor: pointer;
+
+}
+
+.show-list-item img {
+  width: 60px;
+  height: 60px;
+  object-fit: cover;
+  /* Giữ tỷ lệ khung hình */
+  border-radius: 50%;
+  margin-right: 10px;
+  /* Khoảng cách giữa các hình ảnh */
+}
+
+.show-list-item:hover {
+  background-color: #eee;
+}
+
+
+.text {
+  margin-top: 10px;
+}
+
+.text h4 {
+  font-size: 18px;
+  color: #555;
+}
+
+.text p {
+  font-size: 16px;
+  color: #777;
+}

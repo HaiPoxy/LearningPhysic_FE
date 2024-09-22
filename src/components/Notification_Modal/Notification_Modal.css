@@ -1,0 +1,119 @@
+.notification-modal {
+  display: block;
+  position: absolute;
+  top: 62px;
+  right: 253px;
+  background-color: #fefefe;
+  border: 1px solid #ccc;
+  border-radius: 5px;
+  padding: 15px 0px 15px 20px;
+  width: 400px;
+  height: 600px;
+  color: black;
+  overflow: hidden;
+  transition: 1s opacity, 250ms height;
+  box-shadow: 0 4px 8px 0 rgba(0, 0, 0, 0.2), 0 6px 20px 0 rgba(0, 0, 0, 0.19);
+
+}
+
+
+.modal-body {
+  max-height: calc(100% - 15px);
+  overflow-y: auto;
+}
+
+
+
+.notification_modal.open-menu {
+  max-height: 400px;
+}
+
+.notification-modal .modal-header {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  margin-bottom: 20px;
+}
+
+.modal-header {
+  position: sticky;
+  top: 0;
+  padding-bottom: 15px;
+  background: #fff;
+  z-index: 1;
+
+
+}
+
+.modal-header h6 {
+  /* font-size: 1.8rem; */
+}
+
+.modal-header a {
+  color: #f05123;
+  font-size: 1rem;
+  padding: 8px;
+  border-radius: 4px;
+  text-decoration: none;
+}
+
+.modal-header a:hover {
+  background-color: rgb(243, 228, 228);
+}
+
+
+.notifi-item {
+  display: flex;
+  border-bottom: 1px solid #eee;
+  border-top: 1px solid #eee;
+  padding: 15px 5px;
+
+
+  /* margin-bottom: 15px; */
+  cursor: pointer;
+}
+
+.notifi-item:hover {
+  background-color: #eee;
+}
+
+.notifi-item img {
+  /* display: block; */
+  width: 70px;
+  height: auto;
+  margin-right: 10px;
+  border-radius: 50%;
+}
+
+.notifi-item .text {
+  display: flex;
+  flex-direction: column;
+
+}
+
+.notifi-item .text h4 {
+  color: #777;
+  font-size: 16px;
+
+}
+
+.notifi-item .text p {
+  color: #807878;
+  font-size: 14px;
+}
+
+.modal-content {}
+
+.close-modal {
+  color: #aaa;
+  float: right;
+  font-size: 28px;
+  font-weight: bold;
+}
+
+.close-modal:hover,
+.close-modal:focus {
+  color: black;
+  text-decoration: none;
+  cursor: pointer;
+}

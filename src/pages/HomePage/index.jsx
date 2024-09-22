@@ -1,9 +1,19 @@
+import AdvancedCourses from '../../components/AdvancedCourses/AdvancedCourses';
+import Slider from '../../components/Slider/Slider'
+import BasicCourses from '../../components/BasicCourses/BasicCourses'
+
+import InformationAndAdvice from '../../components/InformationAndAdvice/InformationAndAdvice';
+
 function HomePage(props) {
     return (
         <>
-            <div>
-                HOME PAGE Heee
-            </div>
+            {/* <Header /> */}
+
+            <Slider />
+            <AdvancedCourses />
+            <BasicCourses />
+            <InformationAndAdvice />
+            {/* <FooterComponent /> */}
         </>
     );
 }

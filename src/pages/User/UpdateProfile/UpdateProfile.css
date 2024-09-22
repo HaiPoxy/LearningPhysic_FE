@@ -1,0 +1,46 @@
+.update-profile-container {
+  max-width: 500px;
+  margin: 0 auto;
+  padding: 20px;
+  border: 1px solid #ccc;
+  border-radius: 5px;
+  background-color: hsl(0, 0%, 98%);
+}
+
+
+.update-profile-form h3 {
+  text-align: center;
+  background-color: #007bff;
+  color: #fff;
+  padding: 10px;
+  border-top-left-radius: 5px;
+  border-top-right-radius: 5px;
+  margin-bottom: 20px;
+}
+
+.update-profile-form label {
+  display: block;
+  margin-bottom: 4px;
+  font-size: 16px;
+}
+
+.update-profile-form input {
+  width: 100%;
+  padding: 8px;
+  margin-bottom: 15px;
+  border: 1px solid #ccc;
+  border-radius: 5px;
+}
+
+.update-profile-form button {
+  padding: 10px 20px;
+  background-color: #007bff;
+  color: #fff;
+  border: none;
+  border-radius: 5px;
+  cursor: pointer;
+}
+
+.update-profile-form button:hover {
+  background-color: #0056b3;
+}

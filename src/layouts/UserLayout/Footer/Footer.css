@@ -1,0 +1,100 @@
+.footer {
+  color: #d9d9d9;
+  background-color: #323232;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  gap: 20px;
+  padding: 30px 8vw;
+  margin-top: 70px;
+  width: calc(100% + 20%);
+  margin-left: -10%;
+  margin-right: -10%;
+}
+
+.footer-content {
+  width: 100%;
+  display: grid;
+  grid-template-columns: 2fr 1fr 1fr;
+  gap: 80px;
+}
+
+.footer-content-left,
+.footer-content-center,
+.footer-content-right {
+  display: flex;
+  flex-direction: column;
+  align-items: start;
+  gap: 20px;
+}
+
+.footer-content-left li,
+.footer-content-center li,
+.footer-content-right li {
+  list-style: none;
+  margin-bottom: 10px;
+  cursor: pointer;
+}
+
+/* .footer-content-right {
+  margin-left: 100px;
+} */
+
+
+.footer-content-center h2,
+.footer-content-right h2 {
+  color: white;
+}
+
+.footer-social-icons {
+  display: flex;
+  gap: 15px;
+  cursor: pointer;
+
+}
+
+.footer-social-icons a {
+  font-size: 30px;
+  color: white;
+}
+
+.footer hr {
+  width: 100%;
+  height: 2px;
+  margin: 10px 0;
+  background-color: gray;
+  border: none;
+}
+
+.app-download-platforms {
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  gap: 10px;
+
+  /* gap: max(2vw, 10px); */
+  /* margin-top: 10px; */
+}
+
+.app-download-platforms img {
+  width: max(30vw, 120px);
+  max-width: 180px;
+  transition: 0.5s;
+  cursor: pointer;
+}
+
+.app-download-platforms img:hover {
+  transform: scale(1.05);
+}
+
+@media (max-width: 750px) {
+  .footer-content {
+    display: flex;
+    flex-direction: column;
+    gap: 35px;
+  }
+
+  .footer-coryrignht {
+    text-align: center;
+  }
+}

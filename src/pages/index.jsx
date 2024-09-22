@@ -14,6 +14,13 @@ import NotFoundComponent from './NotFoundComponent'
 import ForumComponent from './User/ForumComponent'
 import ResetPasswordComponent from './ResetPasswordComponent';
 import ShoppingCartComponent from './User/ShoppingCartComponent';
+import Notification_ShowAll from './User/Notification_ShowAll/Notification_ShowAll';
+
+import ChangePassword from './User/ChangePassword/ChangePassword';
+import UpdateProfile from './User/UpdateProfile/UpdateProfile';
+import AppSettings from './User/AppSettings/AppSettings';
+import FavoriteCourse from './User/FavoriteCourse/FavoriteCourse';
+import Favorite_Book from './User/Favorite_Book/Favorite_Book';
 
 export {
     HomePage,
@@ -31,5 +38,11 @@ export {
     NotFoundComponent,
     ForumComponent,
     ResetPasswordComponent,
-    ShoppingCartComponent
+    ShoppingCartComponent,
+    Notification_ShowAll,
+    ChangePassword,
+    UpdateProfile,
+    AppSettings,
+    FavoriteCourse,
+    Favorite_Book
 };

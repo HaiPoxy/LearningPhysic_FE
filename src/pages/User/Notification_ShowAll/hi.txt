@@ -1,0 +1,36 @@
+import React from 'react'
+import './Notification_ShowAll.css'
+
+const Notification_ShowAll = ({ props }) => {
+
+  const { avatars } = props.location.state;
+
+  console.log(props.location.state);
+
+
+  return (
+    <div className="notification-show">
+      {/* <h3>Thông báo</h3>
+
+      <div className="show-list">
+        {avatars.map((item, index) => (
+          <div className="show-list-item" key={index}>
+            <img src={item.image} alt="img" />
+            <div className="text">
+              <h4>{item.fullName}</h4>
+              <p>{item.description}</p>
+            </div>
+          </div>
+        ))}
+      </div> */}
+
+
+
+
+
+    </div>
+
+
+  )
+};
+export default Notification_ShowAll;

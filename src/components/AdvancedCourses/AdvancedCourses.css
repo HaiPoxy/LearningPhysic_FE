@@ -1,0 +1,129 @@
+.advancedCourses {
+  /* width: 80%;
+  margin: auto;
+  margin-top: 70px; */
+  margin-top: 70px;
+}
+
+.advancedCourses-title {
+  /* display: flex;
+  justify-content: center;
+  align-items: center; */
+}
+
+.advancedCourses-title h2 {
+  margin-bottom: 30px;
+  color: black;
+  font-weight: 900;
+}
+
+
+.advancedCourses-cart {
+  display: grid;
+  grid-template-columns: 1fr 1fr 1fr 1fr;
+  margin-top: 30px;
+  margin-bottom: 10px;
+  gap: 30px;
+  row-gap: 50px;
+  perspective: 800px;
+}
+
+.advancedCourses-cart-list {
+  position: relative;
+  /* border: 1px solid #fff; */
+  background: black;
+  box-shadow: 0px 0px 10px #00000015;
+  border-radius: 8px;
+  overflow: hidden;
+  display: block;
+  height: 300px;
+  color: #fff;
+  transition: transform 0.2s ease;
+}
+
+.advancedCourses-cart-list:hover {
+  transform: scaleY(1.050);
+
+}
+
+.advancedCourses-cart-top {
+  display: flex;
+}
+
+/* .typicalCourses-cart-top h1 {
+  font-size: 16px;
+} */
+
+.advancedCourses-cart-top>img {
+  position: absolute;
+  top: 0;
+  left: 0;
+  right: 0;
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+  display: block;
+  flex-shrink: 0;
+  flex-grow: 0;
+}
+
+.advancedCourses-cart-top-content {
+  position: absolute;
+  /* top: 70%;
+  left: 50%; */
+  top: 30%;
+  left: 50%;
+
+  transform: translate(-50%, -50%) translateZ(50px);
+
+  width: 100%;
+  padding: 20px;
+  text-shadow: 2px 2px 4px rgba(0, 0, 0, 0.5);
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
+  gap: 20px;
+}
+
+.advancedCourses-cart-top-content h1 {
+  font-size: 30px;
+  color: red;
+  /* box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1); */
+  font-weight: 800;
+}
+
+
+
+.advancedCourses-cart-bottom {
+  position: absolute;
+  /* top: 70%;
+  left: 50%; */
+  bottom: 0;
+  left: 0;
+  right: 0;
+  height: 100px;
+  padding: 24px 20px;
+  background-color: #ffffff;
+  display: flex;
+  flex-direction: column;
+  gap: 10px;
+
+}
+
+.advancedCourses-cart-bottom .top {
+  display: flex;
+  justify-content: space-between;
+}
+
+.advancedCourses-cart-bottom a {
+  font-size: 18px;
+  text-decoration: none;
+  color: black;
+  font-weight: 500;
+}
+
+.advancedCourses-cart-bottom p {
+  color: tomato;
+  font-weight: 600;
+}
