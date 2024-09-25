@@ -13,6 +13,31 @@ function App() {
         </Router>
     </>
   )
+  const [selectedArticle, setSelectedArticle] = useState(null);
+
+    const handleEdit = (article) => {
+        setSelectedArticle(article);
+    };
+
+    const handleSave = () => {
+        setSelectedArticle(null);
+    };
+
+    const handleClear = () => {
+        setSelectedArticle(null);
+    };
+
+    return (
+        <div>
+            <h1>Article Management</h1>
+            <ArticleForm
+                selectedArticle={selectedArticle}
+                onSave={handleSave}
+                onClear={handleClear}
+            />
+            <ArticleList onEdit={handleEdit} />
+        </div>
+    );
 }
 
 export default App
