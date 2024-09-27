@@ -19,57 +19,57 @@ import avatar15 from '../assets/notification_image/avatar15.png';
 export const notification = [
   {
     image: avatar1,
-    fullName: "Nguyễn Văn A",
-    description: "Đã mua khoá học nâng cao"
+    fullName: "PhysicLearning",
+    description: "Chúc mừng bạn đã mua khoá học Lớp 6 nâng cao thành công"
   },
   {
     image: avatar2,
-    fullName: "Nguyễn Văn B",
-    description: "Đã mua khoá học nâng cao"
+    fullName: "PhysicLearning",
+    description: "Đã có khoá học mới - nhanh tay đăng kí ngay"
   },
   {
     image: avatar3,
     fullName: "Nguyễn Văn C",
-    description: "Đã mua khoá học nâng cao"
+    description: "Đã thích bình luận của bạn"
   },
   {
     image: avatar4,
     fullName: "Nguyễn Văn D",
-    description: "Đã mua khoá học nâng cao"
+    description: "Đã trả lời bình luận của bạn"
   },
   {
     image: avatar7,
-    fullName: "Nguyễn Văn D",
-    description: "Đã mua khoá học nâng cao"
+    fullName: "PhysicLearning",
+    description: "Đã cập nhật thêm bài học ở Lớp 7 miễn phí"
   },
-  {
-    image: avatar8,
-    fullName: "Nguyễn Văn D",
-    description: "Đã mua khoá học nâng cao"
-  },
-  {
-    image: avatar9,
-    fullName: "Nguyễn Văn D",
-    description: "Đã mua khoá học nâng cao"
-  },
-  {
-    image: avatar10,
-    fullName: "Nguyễn Văn D",
-    description: "Đã mua khoá học nâng cao"
-  },
-  {
-    image: avatar11,
-    fullName: "Nguyễn Văn D",
-    description: "Đã mua khoá học nâng cao"
-  },
-  {
-    image: avatar12,
-    fullName: "Nguyễn Văn D",
-    description: "Đã mua khoá học nâng cao"
-  },
-  {
-    image: avatar13,
-    fullName: "Nguyễn Văn D",
-    description: "Đã mua khoá học nâng cao"
-  }
+  // {
+  //   image: avatar8,
+  //   fullName: "Nguyễn Văn D",
+  //   description: "Đã mua khoá học nâng cao"
+  // },
+  // {
+  //   image: avatar9,
+  //   fullName: "Nguyễn Văn D",
+  //   description: "Đã mua khoá học nâng cao"
+  // },
+  // {
+  //   image: avatar10,
+  //   fullName: "Nguyễn Văn D",
+  //   description: "Đã mua khoá học nâng cao"
+  // },
+  // {
+  //   image: avatar11,
+  //   fullName: "Nguyễn Văn D",
+  //   description: "Đã mua khoá học nâng cao"
+  // },
+  // {
+  //   image: avatar12,
+  //   fullName: "Nguyễn Văn D",
+  //   description: "Đã mua khoá học nâng cao"
+  // },
+  // {
+  //   image: avatar13,
+  //   fullName: "Nguyễn Văn D",
+  //   description: "Đã mua khoá học nâng cao"
+  // }
 ];

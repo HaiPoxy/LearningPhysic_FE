@@ -26,7 +26,7 @@ const Navbar = () => {
           <a href="#" onClick={() => handleMenuClick("lộ trình")} className={menu === "lộ trình" ? "active" : ""}>Lộ trình - Bí quyết học</a>
         </li>
         <li>
-          <a href="#" onClick={() => handleMenuClick("kiểm tra")} className={menu === "kiểm tra" ? "active" : ""}>Kiểm tra</a>
+          <a href="/exam-list" onClick={() => handleMenuClick("kiểm tra")} className={menu === "kiểm tra" ? "active" : ""}>Kiểm tra</a>
         </li>
         <li>
           <a href="#" onClick={() => handleMenuClick("đgnl")} className={menu === "đgnl" ? "active" : ""}>ĐGNL</a>

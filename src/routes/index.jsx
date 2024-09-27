@@ -23,7 +23,9 @@ import {
     UpdateProfile,
     AppSettings,
     FavoriteCourse,
-    Favorite_Book
+    Favorite_Book,
+    ExamList,
+    DoingExam
 } from '../pages';
 
 export const routeItems = [
@@ -129,6 +131,30 @@ export const routeItems = [
                 title: 'Favorite_Book Page',
                 component: Favorite_Book,
                 path: '/favorite-book'
+            },
+            {
+                name: 'ExamList',
+                title: 'ExamList Page',
+                component: ExamList,
+                path: '/exam-list'
+            },
+            {
+                name: 'DoingExam',
+                title: 'DoingExam Page',
+                component: DoingExam,
+                path: '/doing-exam/Lớp 6/'
+            },
+            {
+                name: 'DoingExam',
+                title: 'DoingExam Page',
+                component: DoingExam,
+                path: '/doing-exam/Lớp 7/'
+            },
+            {
+                name: 'DoingExam',
+                title: 'DoingExam Page',
+                component: DoingExam,
+                path: '/doing-exam/Lớp 8/'
             }
         ]
     },

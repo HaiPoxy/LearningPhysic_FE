@@ -21,6 +21,8 @@ import UpdateProfile from './User/UpdateProfile/UpdateProfile';
 import AppSettings from './User/AppSettings/AppSettings';
 import FavoriteCourse from './User/FavoriteCourse/FavoriteCourse';
 import Favorite_Book from './User/Favorite_Book/Favorite_Book';
+import ExamList from './User/ExamPage/ExamList';
+import DoingExam from './User/ExamPage/DoingExam';
 
 export {
     HomePage,
@@ -44,5 +46,7 @@ export {
     UpdateProfile,
     AppSettings,
     FavoriteCourse,
-    Favorite_Book
+    Favorite_Book,
+    ExamList,
+    DoingExam
 };
