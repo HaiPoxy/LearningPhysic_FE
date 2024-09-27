@@ -14,6 +14,9 @@ import NotFoundComponent from './NotFoundComponent'
 import ForumComponent from './User/ForumComponent'
 import ResetPasswordComponent from './ResetPasswordComponent';
 import ShoppingCartComponent from './User/ShoppingCartComponent';
+import ExcercisesComponent from './Admin/ExcercisesComponent';
+import DetailLecturesComponet from './Admin/DetailLecturesComponet/index';
+
 
 export {
     HomePage,
@@ -27,9 +30,11 @@ export {
     ChatsComponent,
     EbooksComponent,
     LecturesComponent,
+    DetailLecturesComponet,
     CoursesComponent,
     NotFoundComponent,
     ForumComponent,
     ResetPasswordComponent,
-    ShoppingCartComponent
+    ShoppingCartComponent,
+    ExcercisesComponent
 };

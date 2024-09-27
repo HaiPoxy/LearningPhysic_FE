@@ -2,16 +2,19 @@ import AnonymousLayout from "../layouts/AnonymousLayout/index.jsx";
 import UserLayout from "../layouts/UserLayout/index.jsx";
 import AdminLayout from "../layouts/AdminLayout/index.jsx";
 import {
+
     AccountsComponent,
     ArticlesComponent,
     ChatsComponent,
-    CoursesComponent,
     DashboardComponent,
     EbooksComponent,
     ExamsComponent,
     ForumComponent,
     HomePage,
+    CoursesComponent,
     LecturesComponent,
+    DetailLecturesComponet,
+    ExcercisesComponent,
     LoginComponent,
     LogoutComponent,
     NotFoundComponent,
@@ -84,6 +87,30 @@ export const routeItems = [
                 title: 'Shopping Cart Page',
                 component: ShoppingCartComponent,
                 path: '/shopping-cart'
+            },
+            {
+                name: 'Course',
+                title: 'Course Page',
+                component: CoursesComponent,
+                path: '/course/:id'
+            },
+            {
+                name: 'lectures',
+                title: 'Lectures Page',
+                component: LecturesComponent,
+                path: '/lectures/:id'
+            },
+            {
+                name: 'DetailLectures',
+                title: 'Detail Lectures Page',
+                component: DetailLecturesComponet,
+                path: '/detaillectures/:id'
+            },
+            {
+                name: 'excercises',
+                title: 'Excercises Page',
+                component: ExcercisesComponent,
+                path: '/excercises/:id'
             }
         ]
     },
