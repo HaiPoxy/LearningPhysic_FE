@@ -47,10 +47,6 @@ const AdvancedCourses = () => {
                     <FaRegHeart style={{ color: 'black', fontSize: '20px' }} />
                   )}
                 </div>
-
-
-
-
               </div>
 
               <p>{item.price}</p>

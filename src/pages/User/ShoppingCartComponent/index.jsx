@@ -1,5 +1,5 @@
-import React, {useEffect, useState} from 'react';
-import {Box, Button, Divider, Grid, IconButton, Paper, TextField, Typography} from '@mui/material';
+import React, { useEffect, useState } from 'react';
+import { Box, Button, Divider, Grid, IconButton, Paper, TextField, Typography } from '@mui/material';
 import ShoppingCartIcon from '@mui/icons-material/ShoppingCart';
 import DeleteIcon from '@mui/icons-material/Delete';
 
@@ -8,54 +8,53 @@ const primaryColor = '#1976d2';
 function ShoppingCartComponent() {
     const [cartItems, setCartItems] = useState([]);
     const data = [
-        {
-            "id": 1,
-            "title": "React cho Người Mới Bắt Đầu",
-            "instructor": "Lê Hoài Nam",
-            "duration": "10 giờ",
-            "price": 490009.9,
-            "image": "https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcSlGmKtrnxElpqw3AExKXPWWBulcwjlvDJa1Q&s",
-            "type": "course",
-            "level": "Sơ cấp",
-            "language": "Tiếng Hindu",
-            "releaseDate": "2022-01-15"
-        },
-        {
-            "id": 2,
-            "title": "Thành Thạo Node.js",
-            "instructor": "Lê Hoài Nam",
-            "duration": "15 giờ",
-            "price": 7900099,
-            "image": "https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcSHMTafBeJ-VJ9hVJbIxAjprXT7wvwGbIVQpA&s",
-            "type": "course",
-            "level": "Nâng cao",
-            "language": "Tiếng Trung",
-            "releaseDate": "2021-08-10"
-        },
+        // {
+        //     "id": 1,
+        //     "title": "React cho Người Mới Bắt Đầu",
+        //     "instructor": "Lê Hoài Nam",
+        //     "duration": "10 giờ",
+        //     "price": 490009.9,
+        //     "image": "https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcSlGmKtrnxElpqw3AExKXPWWBulcwjlvDJa1Q&s",
+        //     "type": "course",
+        //     "level": "Sơ cấp",
+        //     "language": "Tiếng Hindu",
+        //     "releaseDate": "2022-01-15"
+        // },
+        // {
+        //     "id": 2,
+        //     "title": "Thành Thạo Node.js",
+        //     "instructor": "Lê Hoài Nam",
+        //     "duration": "15 giờ",
+        //     "price": 7900099,
+        //     "image": "https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcSHMTafBeJ-VJ9hVJbIxAjprXT7wvwGbIVQpA&s",
+        //     "type": "course",
+        //     "level": "Nâng cao",
+        //     "language": "Tiếng Trung",
+        //     "releaseDate": "2021-08-10"
+        // },
         {
             "id": 3,
-            "title": "Các Mẫu React Nâng Cao",
+            "title": "Khoá học lý Lớp 11 Nâng cao",
             "instructor": "Lê Hoài Nam",
             "duration": "12 giờ",
-            "price": 850009.9,
+            "price": 1200000,
             "image": "https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcSlGmKtrnxElpqw3AExKXPWWBulcwjlvDJa1Q&s",
             "type": "course",
-            "level": "Trung cấp",
-            "language": "Tiếng Lào",
+            "level": "Nâng cao",
+            "language": "Tiếng Việt",
             "releaseDate": "2023-03-05"
         },
         {
             "id": 4,
-            "title": "Học Thiết Kế Mẫu JavaScript",
+            "title": "Khoá học lý Lớp 12 Nâng cao",
             "instructor": "Lê Hoài Nam",
-            "price": 350000,
+            "price": 1600000,
             "image": "https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcSlGmKtrnxElpqw3AExKXPWWBulcwjlvDJa1Q&s",
             "type": "ebook",
-            "format": "PDF",
-            "publisher": "Nhà Xuất Bản Tech Books",
-            "pages": 250,
-            "language": "Tiếng Pháp",
-            "releaseDate": "2020-11-22"
+
+
+            "language": "Tiếng Việt",
+            "releaseDate": "2024-07-22"
         }
     ];
 
@@ -70,16 +69,16 @@ function ShoppingCartComponent() {
     return (
         <Grid container spacing={4} p={3} mt={3} mb={10}>
             <Grid item xs={12} md={8}>
-                <Typography variant="h4" gutterBottom sx={{fontWeight: 'bold', color: primaryColor}}>
+                <Typography variant="h4" gutterBottom sx={{ fontWeight: 'bold', color: primaryColor }}>
                     Giỏ hàng của bạn
                 </Typography>
-                <Divider/>
+                <Divider />
             </Grid>
             {/* Shopping Cart Section */}
             <Grid item xs={12} md={8}>
                 <Box>
                     {data.map((item) => (
-                        <Paper elevation={3} sx={{p: 2, mb: 3, backgroundColor: '#ECF0F1'}} key={item.id}>
+                        <Paper elevation={3} sx={{ p: 2, mb: 3, backgroundColor: '#ECF0F1' }} key={item.id}>
                             <Grid container spacing={2}>
                                 <Grid
                                     item
@@ -102,8 +101,8 @@ function ShoppingCartComponent() {
                                     />
                                 </Grid>
 
-                                <Grid item xs={6} sx={{textAlign: 'left'}}>
-                                    <Typography variant="h6" sx={{fontWeight: 'bold', color: primaryColor}}>
+                                <Grid item xs={6} sx={{ textAlign: 'left' }}>
+                                    <Typography variant="h6" sx={{ fontWeight: 'bold', color: primaryColor }}>
                                         {item.title}
                                     </Typography>
                                     <Typography variant="body2" color="textSecondary">
@@ -140,15 +139,15 @@ function ShoppingCartComponent() {
                                     )}
                                 </Grid>
 
-                                <Grid item xs={3} sx={{display: 'flex', alignItems: 'center'}}>
-                                    <Typography sx={{fontWeight: 'bold', fontSize: 25, color: primaryColor}}>
+                                <Grid item xs={3} sx={{ display: 'flex', alignItems: 'center' }}>
+                                    <Typography sx={{ fontWeight: 'bold', fontSize: 25, color: primaryColor }}>
                                         {new Intl.NumberFormat().format(item.price)}
                                     </Typography>
                                 </Grid>
 
-                                <Grid item xs={1} sx={{display: 'flex', alignItems: 'center'}}>
+                                <Grid item xs={1} sx={{ display: 'flex', alignItems: 'center' }}>
                                     <IconButton color="error" onClick={() => handleDelete(item.id)}>
-                                        <DeleteIcon/>
+                                        <DeleteIcon />
                                     </IconButton>
                                 </Grid>
                             </Grid>
@@ -156,10 +155,10 @@ function ShoppingCartComponent() {
                     ))}
                 </Box>
 
-                <Divider/>
+                <Divider />
 
                 <Box my={3} textAlign="right">
-                    <Typography variant="h4" sx={{fontWeight: 'bold', color: primaryColor}}>
+                    <Typography variant="h4" sx={{ fontWeight: 'bold', color: primaryColor }}>
                         <Typography component="span" sx={{
                             fontSize: 20,
                             fontWeight: 'bold'
@@ -168,16 +167,16 @@ function ShoppingCartComponent() {
                         </Typography>
                         {' '}
                         <Typography component="span"
-                                    sx={{color: 'red', fontSize: 30, fontWeight: 'bold'}}> {/* Màu đỏ cho số tiền */}
-                            {new Intl.NumberFormat().format(1200000)} VND
+                            sx={{ color: 'red', fontSize: 30, fontWeight: 'bold' }}> {/* Màu đỏ cho số tiền */}
+                            {new Intl.NumberFormat().format(2800000)} VND
                         </Typography>
                     </Typography>
                 </Box>
 
 
                 <Box my={10}>
-                    <Button variant="contained" startIcon={<ShoppingCartIcon/>}
-                            sx={{backgroundColor: primaryColor, color: '#FFFFFF'}}>
+                    <Button variant="contained" startIcon={<ShoppingCartIcon />}
+                        sx={{ backgroundColor: primaryColor, color: '#FFFFFF' }}>
                         Tiếp tục mua sắm
                     </Button>
                 </Box>
@@ -185,12 +184,12 @@ function ShoppingCartComponent() {
 
             {/* Payment Info Section */}
             <Grid item xs={12} md={4}>
-                <Box p={4} sx={{backgroundColor: primaryColor, borderRadius: '12px', color: 'white'}}>
-                    <Typography variant="h4" gutterBottom sx={{fontWeight: 'bold'}}>Thông tin thanh toán</Typography>
-                    <Divider sx={{borderColor: 'rgba(255, 255, 255, 0.5)'}}/>
+                <Box p={4} sx={{ backgroundColor: primaryColor, borderRadius: '12px', color: 'white' }}>
+                    <Typography variant="h4" gutterBottom sx={{ fontWeight: 'bold' }}>Thông tin thanh toán</Typography>
+                    <Divider sx={{ borderColor: 'rgba(255, 255, 255, 0.5)' }} />
 
                     <Box my={3}>
-                        <Typography variant="body2" sx={{color: 'white'}}>Phương thức thanh toán:</Typography>
+                        <Typography variant="body2" sx={{ color: 'white' }}>Phương thức thanh toán:</Typography>
                         <Box display="flex" mt={1}>
                             <Button
                                 variant="outlined"
@@ -256,34 +255,34 @@ function ShoppingCartComponent() {
                     </Box>
 
                     <Box my={3}>
-                        <Typography variant="body2" sx={{color: 'white'}}>Tên trên thẻ:</Typography>
+                        <Typography variant="body2" sx={{ color: 'white' }}>Tên trên thẻ:</Typography>
                         <TextField
                             variant="outlined"
                             fullWidth
                             value="Le Hoai Nam"
-                            sx={{backgroundColor: 'rgba(255, 255, 255, 0.1)', borderRadius: '4px'}}
+                            sx={{ backgroundColor: 'rgba(255, 255, 255, 0.1)', borderRadius: '4px' }}
                             InputProps={{
-                                style: {color: 'white'}
+                                style: { color: 'white' }
                             }}
                         />
                     </Box>
 
                     <Box my={3}>
-                        <Typography variant="body2" sx={{color: 'white'}}>Số thẻ:</Typography>
+                        <Typography variant="body2" sx={{ color: 'white' }}>Số thẻ:</Typography>
                         <TextField
                             variant="outlined"
                             fullWidth
                             value="•••• •••• •••• 1829"
-                            sx={{backgroundColor: 'rgba(255, 255, 255, 0.1)', borderRadius: '4px'}}
+                            sx={{ backgroundColor: 'rgba(255, 255, 255, 0.1)', borderRadius: '4px' }}
                             InputProps={{
-                                style: {color: 'white'}
+                                style: { color: 'white' }
                             }}
                         />
                     </Box>
 
                     <Grid container spacing={2} my={3}>
                         <Grid item xs={6}>
-                            <Typography variant="body2" sx={{color: 'white'}}>Ngày hết hạn:</Typography>
+                            <Typography variant="body2" sx={{ color: 'white' }}>Ngày hết hạn:</Typography>
                             <Box display="flex" justifyContent="space-between">
                                 <TextField
                                     variant="outlined"
@@ -296,7 +295,7 @@ function ShoppingCartComponent() {
                                         mr: 1
                                     }}
                                     InputProps={{
-                                        style: {color: 'white'}
+                                        style: { color: 'white' }
                                     }}
                                 />
                                 <TextField
@@ -309,20 +308,20 @@ function ShoppingCartComponent() {
                                         color: 'white'
                                     }}
                                     InputProps={{
-                                        style: {color: 'white'}
+                                        style: { color: 'white' }
                                     }}
                                 />
                             </Box>
                         </Grid>
                         <Grid item xs={6}>
-                            <Typography variant="body2" sx={{color: 'white'}}>CCV:</Typography>
+                            <Typography variant="body2" sx={{ color: 'white' }}>CCV:</Typography>
                             <TextField
                                 variant="outlined"
                                 fullWidth
                                 value="XXX"
-                                sx={{backgroundColor: 'rgba(255, 255, 255, 0.1)', borderRadius: '4px', color: 'white'}}
+                                sx={{ backgroundColor: 'rgba(255, 255, 255, 0.1)', borderRadius: '4px', color: 'white' }}
                                 InputProps={{
-                                    style: {color: 'white'}
+                                    style: { color: 'white' }
                                 }}
                             />
                         </Grid>
